@@ -1,0 +1,71 @@
+<div class="caselet-card mb-3" *ngFor="let caselet of caselets; let i = index">
+  <div>
+    <div class="caselet-header">
+          <h6 [routerLink]="['/caselet', caselet.id]" class = "caselet-title">{{caselet.title}}&nbsp;</h6>
+          <p class = "caselet-author">|&nbsp;Author's Name: {{caselet.user.name}}</p>
+      <div class="float-right">
+        <button class="download-icon">
+          <i class="fa fa-download"></i>
+        </button>
+        <button class="share-icon">
+          <i class="fa fa-share-alt"></i>
+        </button>
+        <button (click) = "likeCaselet(caselet.id, i)" class="like-icon"
+          [ngClass]="{'caselet-liked' : caselet.liked }">
+          <i class="fa fa-heart"></i>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div style="border-right: solid 1px  #e6dfcc;" class="col-3 ml-2">
+        <b>Account:</b> {{caselet.account.name}}
+        <br />
+        <b>Vertical:</b> {{caselet.vertical.name}}
+        <br />
+        <b>Domain: </b>
+        <span *ngIf = "caselet.domain.length != 0">{{caselet.domain}}</span>
+        <span *ngIf = "caselet.domain.length == 0" class = "notAvailable">NA</span>
+        <br />
+        <br />
+      </div>
+      <div style="border-right: solid 1px  #e6dfcc;" class="col-3">
+        <b>Technologies: </b>
+        <span *ngIf = "caselet.technologies !== 0">
+        <span *ngFor="let technology of caselet.technologies; let isLast=last">
+          {{technology.name}}{{isLast ? '' : ', '}}
+        </span>
+       </span>
+       <span class = "notAvailable" *ngIf = "caselet.technologies.length === 0">
+          NA
+        </span>
+        <br />
+        <b>Tools:</b>
+        <span *ngIf = "caselet.tools.length === 0" class = "notAvailable">
+            NA
+          </span>
+        <span *ngIf = "caselet.tools.length !== 0">
+        <span *ngFor="let tool of caselet.tools; let isLast=last">
+          {{tool.name}}{{isLast ? '' : ', '}}
+        </span>
+      </span>
+        <br />
+        <br />
+      </div>
+      <div style="border-right: solid 1px  #e6dfcc;" class="col-3">
+        <b>Tags:</b>
+        <span *ngFor="let tag of caselet.tags" class="chip-tags">
+          {{tag.name}}
+        </span>
+      </div>
+      <div class="col">
+        <b>Service Offering:</b> {{caselet.offering.name}}
+        <br />
+        <b>Engineering: </b>
+        <span *ngIf = "caselet.engineering.length != 0">{{caselet.engineering}}</span>
+        <span *ngIf = "caselet.engineering.length == 0" class = "notAvailable">NA</span>
+        <br />
+        <br />
+      </div>
+    </div>
+  </div>
+</div>

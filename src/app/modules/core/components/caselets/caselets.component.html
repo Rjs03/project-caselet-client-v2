@@ -1,0 +1,31 @@
+<div class="results p-0 m-0">
+  <div *ngIf = "dataFetched" class="results-heading">
+    <div *ngIf="caselets.length === 0">
+      <div class = "pl-5">
+          <a class="refresh-caselets" (click)="refreshCaselets()"><i class="fa fa-sync"></i>&nbsp;&nbsp;Refresh</a><br />
+      </div>
+      <h5 class = "disabled-text pl-5">Sorry no caselets found!</h5>
+    </div>
+    <div *ngIf="caselets.length !== 0">
+      <span class="float-left pl-5">
+        <a class="refresh-caselets" (click)="refreshCaselets()"><i class="fa fa-sync"></i>&nbsp;&nbsp;Refresh</a>
+      </span>
+      <span class="display-view float-right pr-5">
+        <p style="display: inline" class="px-2">View</p>
+        <button class="display-button mx-1" [disabled]="!showList" (click)="toggleList()">
+          <i class="fa fa-th-large"></i>
+        </button>
+        <button class="display-button mx-1" [disabled]="showList" (click)="toggleList()">
+          <i class="fa fa-bars"></i>
+        </button>
+      </span>
+      <div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"
+        [scrollWindow]="false" *ngIf="dataFetched" class="caselets">
+        <app-caselet-list [caselets]="caselets" class="m-4" [ngClass]="{'visible': showList, 'hidden': !showList}">
+        </app-caselet-list>
+        <app-caselet-grid [caselets]="caselets" class="my-1" [ngClass]="{'visible': !showList, 'hidden': showList}">
+        </app-caselet-grid>
+      </div>
+    </div>
+  </div>
+</div>

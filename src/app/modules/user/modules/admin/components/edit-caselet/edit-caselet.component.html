@@ -1,0 +1,278 @@
+<div class="container mt-3">
+  <a routerLink="/" style="text-decoration: none; font-size: 125%; color: #838383">
+    < Back</a>&nbsp;&nbsp; <a routerLink="/" style="text-decoration: none; color: #747474">Home
+  </a>&nbsp;>&nbsp;
+  <a routerLink="/addCaselet" style="text-decoration: none; color: #747474">Add Caselet</a>
+  <form [formGroup]="storyForm" (ngSubmit)="onCaseletFormSubmit()">
+    <br />
+    <div *ngIf = "rejected && !admin">
+      <p style = "color: red">{{rejectComment}}</p>
+    </div>
+    <div *ngIf="stepCount == 1">
+      <h4 style="font-style: italic; color: #4e6976">Basic Information</h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <label for="title">
+        <h6>Title of the caselet</h6>
+      </label>
+      <input formControlName="title" type="search" class="form-control" id="title" placeholder="Enter title"><br />
+      <label for="experts">
+        <h6>Experts of the topic</h6>
+      </label>
+      <input formControlName="experts" type="search" class="form-control" id="experts"
+        placeholder="Enter experts"><br />
+      <h6>Tags</h6>
+      <tag-input  [modelAsStrings] = true  formControlName="tags" theme="bootstrap" secondaryPlaceholder="Enter tag" placeholder="+Tag"
+            style=" text-transform: uppercase; border: solid 1px #e8ecee; border-radius: 2%;"></tag-input><br />
+      <br />
+      <input *ngIf="admin" type="file" (change)="fileChange($event)">
+      <div *ngIf="imageUploaded == true">
+        <h1>Image Uploaded</h1>
+        <img src={{coverImageUrl}} style="width: 3rem;" />
+      </div>
+      <div>
+        <button class="float-right primary-button" (click)="incrementStep()">Next</button>
+        <br />
+        <br />
+      </div>
+    </div>
+    <div *ngIf="stepCount == 2">
+      <h4 style="font-style: italic; color: #4e6976">Meta Data</h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <div class="row">
+        <div class="col-6">
+          <h6>Technology</h6>
+          <tag-input formControlName="technologies" theme="bootstrap" secondaryPlaceholder="Enter technology"
+            placeholder="+Technology" [onlyFromAutocomplete]="false"
+            style=" text-transform: uppercase; border: solid 1px #e8ecee; border-radius: 2%;">
+            <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="someTechnologies">
+            </tag-input-dropdown>
+          </tag-input><br />
+        </div>
+        <div class="col-6">
+          <h6>Tools</h6>
+          <tag-input formControlName="tools" theme="bootstrap" secondaryPlaceholder="Enter tool" placeholder="+Tool"
+            style=" text-transform: uppercase; border: solid 1px #e8ecee; border-radius: 2%;"></tag-input><br />
+        </div>
+        <div class="col-6 mb-3">
+          <h6>Domain</h6>
+          <input formControlName="domain" type="search" class="form-control" id="domain"
+            placeholder="Enter Domain"><br />
+        </div>
+        <div class="col-6 mb-3">
+          <h6>Engineering</h6>
+          <input formControlName="engineering" type="search" class="form-control" id="engineering"
+            placeholder="Enter Engineering"><br />
+        </div>
+        <div class="col-3 mb-3">
+          <h6>Account</h6>
+          <select class="custom-select" id="account" formControlName="account">
+              <option value="" disabled selected>Select your option</option>
+            <option *ngFor="let account of accounts" value={{account.name}}>{{account.name}}</option>
+          </select>
+        </div>
+        <div class="col-3 mb-3">
+          <h6>Practice</h6>
+          <select class="custom-select" id="practice" formControlName="practice">
+              <option value="" disabled selected>Select your option</option>
+            <option *ngFor="let pract of practice" value={{pract.name}}>{{pract.name}}</option>
+          </select>
+        </div>
+        <div class="col-3 mb-3">
+          <h6>Sub Practice</h6>
+          <select class="custom-select" id="vertical" formControlName="service">
+              <option value="" disabled selected>Select your option</option>
+            <option *ngFor="let service of services" value={{service.name}}>{{service.name}}</option>
+          </select>
+        </div>
+        <div class="col-3 mb-3">
+          <h6>Service Offering</h6>
+          <select class="custom-select" id="offering" formControlName="offering">
+              <option value="" disabled selected>Select your option</option>
+            <option *ngFor="let offering of offerings" value={{offering.name}}>{{offering.name}}</option>
+          </select>
+        </div>
+        <div class="col-3 mb-3">
+          <h6>Vertical</h6>
+          <select class="custom-select" id="vertical" formControlName="vertical">
+              <option value="" disabled selected>Select your option</option>
+            <option *ngFor="let vertical of verticals" value={{vertical.name}}>{{vertical.name}}</option>
+          </select>
+        </div>
+        <div class="col-3 mb-3">
+          <h6>Sub Vertical</h6>
+          <select class="custom-select" id="vertical" formControlName="industry">
+              <option value="" disabled selected>Select your option</option>
+            <option *ngFor="let industry of industries" value={{industry.name}}>{{industry.name}}</option>
+          </select>
+        </div>
+        <div class="col-3 mb-3">
+          <h6>Contract</h6>
+          <select class="custom-select" id="contract" formControlName="contract">
+              <option value="" disabled selected>Select your option</option>
+            <option *ngFor="let contract of contracts" value={{contract.name}}>{{contract.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
+        <button class="float-right primary-button" (click)="incrementStep()">Next</button>
+        <br />
+        <br />
+      </div>
+    </div>
+    <div *ngIf="stepCount == 3">
+      <h4 class="customizedToolTip" style="font-style: italic; color: #4e6976" >
+        Customer Details
+        <span style = "font-size: 16px">(Tell us about your customer – What do they do, where are they located, how long has our relationship been etc.
+          How did this account start – any interesting?)</span>
+      </h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <label for="customerName">
+        <h6>Customer Name</h6>
+      </label>
+      <input type="search" class="form-control" id="customerName" placeholder="Enter Customer Name"
+        formControlName="customerName"><br />
+      <h6>Description</h6>
+      <quill-editor #customerDetails [theme]="snow" [styles]=editorStyle [modules]="modules"
+        formControlName="customerDetails" (onEditorCreated)="getEditorInstance($event)">
+      </quill-editor>
+      <br />
+      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
+      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
+      <br />
+      <br />
+    </div>
+    <div *ngIf="stepCount == 4">
+      <h4 class="customizedToolTip" style="font-style: italic; color: #4e6976">
+        Project Details
+        <span style = "font-size: 16px">(What is this project all about?)</span>
+      </h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <quill-editor #projectDetails [theme]="snow" [styles]="editorStyle" [modules]="modules"
+        formControlName="projectDetails" (onEditorCreated)="getEditorInstance($event)">
+      </quill-editor>
+      <br />
+      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
+      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
+      <br />
+      <br />
+    </div>
+    <div *ngIf="stepCount == 5">
+      <h4 class="customizedToolTip" style="font-style: italic; color: #4e6976">
+        Need/ Challenges
+        <span style = "font-size: 16px; max-width: 60rem">(What was the need that is met as stated by the customer or as understood in conversations with the customer?
+          Why did they feel the need for this? What challenge currently customer is facing due to which need has come?
+          What challenges were they facing? What did they want to achieve as a result of this project?)</span>
+      </h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <quill-editor #needChallenges [theme]="snow" [styles]= editorStyle
+      [modules]="modules"
+        formControlName="needChallenges" (onEditorCreated)="getEditorInstance($event)">
+      </quill-editor>
+      <br />
+      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
+      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
+      <br />
+      <br />
+    </div>
+    <div *ngIf="stepCount == 6">
+      <h4 class="customizedToolTip" style="font-style: italic; color: #4e6976">The Solution</h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <p>(What solution did we propose to help them meet this need? What was the technology stack we proposed and why?
+        What was the highlight of our solution? What did we create that we are proud of and which shows our expertise in
+        this area)</p>
+      <quill-editor #solutionProvided [theme]="snow" [styles]="editorStyle" [modules]="modules"
+        formControlName="solutionProvided" (onEditorCreated)="getEditorInstance($event)">
+      </quill-editor>
+      <br />
+      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
+      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
+      <br />
+      <br />
+    </div>
+    <div *ngIf="stepCount == 7">
+      <h4 class="customizedToolTip" style="font-style: italic; color: #4e6976">Customer and Mindtree benefits </h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <p>(Where are we in the project? What have we delivered – what is still to be provided? What value did the
+        customer find from this whole exercise? What did Mindtree gain out of this engagement – what was our learning,
+        our benefits)</p>
+      <quill-editor #customerAndMindtreeBenefits [theme]="snow" [styles]="editorStyle" [modules]="modules"
+        formControlName="customerAndMindtreeBenefits" (onEditorCreated)="getEditorInstance($event)">
+      </quill-editor>
+      <br />
+      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
+      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
+      <br />
+      <br />
+    </div>
+    <div *ngIf="stepCount == 8">
+      <h4 class="customizedToolTip" style="font-style: italic; color: #4e6976">Executive summary of the caselet</h4>
+      <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+      <p>(Articulate the entire caselet in a concise para not exceeding 60 words. An executive summary, or management
+        summary, is produced for business purposes that summarizes a longer caselet in such a way that readers can rapidly
+        become acquainted with a large body of caselet without having to read it all)</p>
+      <quill-editor #executiveSummaryOfTheCaselet [theme]="snow" [styles]="editorStyle" [modules]="modules"
+        formControlName="executiveSummaryOfTheCaselet" (onEditorCreated)="getEditorInstance($event)">
+      </quill-editor>
+      <br />
+      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
+      <button *ngIf="!admin" type = "button" class="float-right primary-button" (click)="reviewCaseletFunction()" data-toggle="modal" data-target="#reviewModal">Review & Submit</button>
+      <button *ngIf="admin" type="button" class="float-right primary-button" (click)="onApproveCaselet()">APPROVE</button>
+      <button *ngIf="admin" type="button" class="float-right btn btn-danger mr-3" data-toggle="modal" data-target="#myModal">SEND BACK</button>
+      <br />
+      <br />
+    </div>
+    <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+    <div *ngIf="!admin" class="mb-5">
+      <div class="float-right mb-5">
+        <button type="button" (click)="onSaveCaselet()" class="secondary-button mx-2">SAVE</button>
+        <!-- <button type="submit" class="primary-button">SUBMIT</button> -->
+      </div>
+    </div>
+  </form>
+
+
+
+    <!-- TheReview Modal -->
+    <div class="modal" id="reviewModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Review Caselet</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <!-- <app-review-caselet [caselet] = "reviewCaselet"></app-review-caselet> -->
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="primary-button" data-dismiss="modal" (click) = "onCaseletFormSubmit()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Send Back Caselet</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <textarea placeholder="Please enter your comments" class="form-control" rows="5" id="comment"  [(ngModel)] = "rejectComment"></textarea>
+          <!-- <input class = "form-control" type = "text" > -->
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "onRejectCaselet()">SEND BACK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="file" style="display: none" id="fileInputField" />

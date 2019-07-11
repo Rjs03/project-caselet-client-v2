@@ -1,0 +1,21 @@
+@mixin card() {
+    border: 1px solid #e6dfcc;
+    border-top-right-radius: 1% 5%;
+    border-bottom-right-radius: 1% 5%;
+    border-top-left-radius: 1% 5%;
+    border-bottom-left-radius: 1% 5%;
+    h6 {
+      padding: 0;
+    }
+    p {
+      padding: 0;
+    }
+    .caselet-header {
+      border-top-right-radius: 1% 8%;
+      border-top-left-radius: 1% 8%;
+        background-color: #f0e9d7;
+        color: #3c6274;
+        padding: 0.5rem;
+    }
+    font-size: 12px;
+  }

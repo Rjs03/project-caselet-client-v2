@@ -1,0 +1,16 @@
+<div *ngIf = "dataFetched" class = "sharedLikeCaselet">
+  <div class = "row">
+  <h6 class="shareHeader col-12">MOST SHARED CASELETS</h6>
+</div>
+  <div *ngFor="let caselet of caselets" class="mb-2">
+    <div class="row">
+      <div class = "col-4 p-0 m-1">
+          <img class = "casletImage" src={{caselet.coverImage}}>
+      </div>
+      <div class = "col">
+          <h6 [routerLink]="['/caselet', caselet.id]"  (click) = "trial(caselet.id)" class = "caseletTitle">{{caselet.title}}</h6>
+          <p class = "caseletAuthor">{{caselet.user.name}}</p>
+      </div>
+    </div>
+  </div>
+</div>

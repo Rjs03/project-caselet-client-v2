@@ -1,0 +1,59 @@
+@mixin sharedLiked ($fontSize, $imageHeight) {
+$font-size: $fontSize;
+$line-height: 1.2;
+$lines-to-show: 2;
+
+.sharedLikeCaselet {
+
+  padding: 0.1rem;
+  .shareHeader {
+    margin: 0;
+    padding: 0;
+    color: hsl(197, 24%, 35%);
+    margin-bottom: 0.5rem;
+    margin-left: 0.1rem;
+  }
+  img {
+    width: 100%;
+    border-radius: 5px;
+    height: $imageHeight;
+  }
+  .caseletTitle {
+    font-size: 8px;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-width: 400px;
+    height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+    margin: 0 auto;
+    font-size: $font-size;
+    line-height: $line-height;
+    -webkit-line-clamp: $lines-to-show;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+    text-overflow: ellipsis;
+    &:hover {
+      cursor: pointer;
+      // color: #947f46;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .caseletAuthor {
+    font-size: 6px;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    max-width: 400px;
+    height: $font-size*$line-height*1; /* Fallback for non-webkit */
+    margin: 0 auto;
+    font-size: $font-size;
+    line-height: $line-height;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+}

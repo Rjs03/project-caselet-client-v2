@@ -1,0 +1,33 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h4 class="modal-title">Share Caselet</h4>
+      <button (click) = "clearData()" type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+      <label for="experts">
+        <h6 class="customizedToolTip">
+          <i class="fa fa-info-circle"></i>&nbsp;
+          Share To: &nbsp;
+          <span class="toolTipInfoSmall">
+            <p> Please press enter after adding name</p>
+          </span>
+        </h6>
+      </label>
+      <tag-input [modelAsStrings]=true [(ngModel)] = "finalValues" (onTextChange)="expertsFunctionCall($event)" [theme]="'ngxtag-theme'"
+        secondaryPlaceholder="Enter name or mid" placeholder="+Add" class="tagInput">
+        <tag-input-dropdown [appendToBody] = "false" [showDropdownIfEmpty]="false" [autocompleteItems]="peopleArray" [identifyBy]="'mid'"
+          [displayBy]="'name'">
+        </tag-input-dropdown>
+      </tag-input><br />
+      <textarea placeholder="Please enter your message" class="form-control" rows="5" id="comment"
+        [(ngModel)]="message"></textarea>
+    </div>
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="primary-button" data-dismiss="modal" (click)="onShareCaselet()">SHARE</button>
+    </div>
+  </div>
+</div>

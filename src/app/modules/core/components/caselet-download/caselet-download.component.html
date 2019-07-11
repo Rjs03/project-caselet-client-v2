@@ -1,0 +1,136 @@
+<div class = "container-fluid"  id = "content" #content>
+  <div class = "row"  *ngIf = "dataFetched">
+      <div class="col-12">
+          <div class="row">
+            <div class="col-8">
+              <h3 style="font-style: italic; color: #335362">{{caselet.title}}</h3>
+              <p style="color: #a2b3bc">| Author's Name : {{caselet.user.name}}</p>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col-5 m-0 p-0">
+                  <p style="margin: 0px; padding: 0px;">Customer: </p>
+                </div>
+                <div class="col-7 m-0 p-0">
+                  {{caselet.customer.name}}
+                </div>
+                <div class="col-5 m-0 p-0">
+                  <p style="margin: 0px; padding: 0px;">Account: </p>
+                </div>
+                <div class="col-7 m-0 p-0">
+                  <p style="margin: 0px; padding: 0px;">{{caselet.account.name}}</p>
+                </div>
+                <div class="col-5 m-0 p-0">
+                  <p style="margin: 0px; padding: 0px;">Vertical: </p>
+                </div>
+                <div class="col-7 m-0 p-0">
+                  <p style="margin: 0px; padding: 0px;">{{caselet.vertical.name}}</p>
+                </div>
+                <div class="col-5 m-0 p-0">
+                  <p style="margin: 0px; padding: 0px;">Practice: </p>
+                </div>
+                <div class="col-7 m-0 p-0">
+                  <p style="margin: 0px; padding: 0px;">{{caselet.practice.name}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+          <div #customer >
+            <h5 style="font-style: italic; color: #335362">The Customer</h5>
+            <div [innerHTML]="caselet.customer.details"></div>
+          </div>
+          <br />
+          <br />
+          <div  #projectDetails >
+            <h5 style="font-style: italic; color: #335362">Project Details</h5>
+            <div [innerHTML]="caselet.projectDetails"></div>
+          </div>
+          <br />
+          <br />
+          <div #need >
+            <h5 style="font-style: italic; color: #335362">The Need/Challenge</h5>
+            <div [innerHTML]="caselet.challenges"></div>
+          </div>
+          <br />
+          <br />
+          <div #solution >
+            <h5 style="font-style: italic; color: #335362">The Solution</h5>
+            <div [innerHTML]="caselet.solution"></div>
+          </div>
+          <br />
+          <br />
+          <div #benefit >
+            <h5 style="font-style: italic; color: #335362">Customer and Mindtree benefits</h5>
+            <div [innerHTML]="caselet.benefits"></div>
+          </div>
+          <br />
+          <br />
+          <div #summary >
+            <h5 style="font-style: italic; color: #335362">Executive summary of the caselet</h5>
+            <div [innerHTML]="caselet.executionSummary"></div>
+          </div>
+          <br />
+          <br />
+          <div #metaData >
+            <h5 style="font-style: italic; color: #335362">Meta Data</h5>
+            <div class="caselet-card mb-3">
+                <div class="caselet-header">
+                  <h6 style="display: inline-block; margin: 0px">{{caselet.title}}&nbsp;|&nbsp;</h6>
+                  <p style="display: inline-block; margin: 0px">Author's Name: {{caselet.user.name}}</p>
+                  <div class="float-right">
+                    <button style="border-radius: 50%; border: none; color: white; background-color: #243a45;">
+                      <i class="fa fa-download"></i>
+                    </button> &nbsp;
+                    <button style="border-radius: 50%; border: none; color: white; background-color: #243a45;">
+                      <i class="fa fa-share-alt"></i>
+                    </button>&nbsp;
+                    <button style="border-radius: 50%; border: none; color: white; background-color: #243a45;">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div style="border-right: solid 1px  #e6dfcc;" class="col-3 ml-2">
+                    <b>Customer:</b> {{caselet.customer.name}}
+                    <br />
+                    <b>Account:</b> {{caselet.account.name}}
+                    <br />
+                    <b>Vertical:</b> {{caselet.vertical.name}}
+                    <br />
+                  </div>
+                  <div style="border-right: solid 1px  #e6dfcc;" class="col-3">
+                    <b>Technologies:</b> <span *ngFor="let technology of caselet.technologies">
+                      {{technology.name}}
+                    </span>
+                    <br />
+                    <b>Tools:</b> <span *ngFor="let tool of caselet.tools">
+                      {{tool.name}}
+                    </span>
+                    <br />
+                    <b>Domain:</b> {{caselet.domain}}
+                    <br />
+                    <b>Service Offering:</b> {{caselet.offering.name}}
+                  </div>
+                  <div style="border-right: solid 1px  #e6dfcc;" class="col">
+                    <b>Tags:</b>
+                    <span *ngFor="let tag of caselet.tags" class="chip-tags">
+                      {{tag.name}}
+                    </span>
+                  </div>
+                  <div class="col-3">
+                    <b>Engineering:</b> {{caselet.engineering}}
+                    <br />
+                    <b>Practice:</b> {{caselet.practice.name}}
+                    <br />
+                    <b>Contract:</b> {{caselet.contract.name}}
+                    <br />
+                  </div>
+                </div>
+              </div>
+          </div>
+          <br />
+          <br />
+      </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container mt-3">
+  <!-- <div *ngIf="dataFetched"> -->
+  <div class="row">
+    <div class="col-8">
+      <h3 style="font-style: italic; color: #335362">Submitted Caselets</h3>
+    </div>
+    <div class="col">
+      <div class="row">
+        Filter by
+        <select class="custom-select form-inline" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <hr style="border-top: 1px solid #4e6976; color: #4e6976;">
+  <div *ngFor="let caselet of caselets">
+    <span>
+      <b>{{caselet.title | uppercase}}</b>
+      | {{caselet.user.name}}
+    </span>
+    <span style = "cursor: pointer" class="float-right" [routerLink]="['/user/admin/approveCaselet', caselet.id]">OPEN</span>
+    <hr style="border-top: 1px solid #4e6976; color: #4e6976;">
+  </div>
+  <div *ngIf = "noPendingCaselets">
+    <br />
+    <h3>There are no pending caselets.</h3>
+  </div>
+</div>

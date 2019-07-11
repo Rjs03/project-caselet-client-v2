@@ -1,0 +1,109 @@
+<div *ngIf = "caselet">
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <h3 style="font-style: italic; color: #335362">{{caselet.title}}</h3>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-5 m-0 p-0">
+            <p style="margin: 0px; padding: 0px;">Customer: </p>
+          </div>
+          <div class="col-7 m-0 p-0">
+            {{caselet.customer.name}}
+          </div>
+          <div class="col-5 m-0 p-0">
+            <p style="margin: 0px; padding: 0px;">Account: </p>
+          </div>
+          <div class="col-7 m-0 p-0">
+            <p style="margin: 0px; padding: 0px;">{{caselet.account}}</p>
+          </div>
+          <div class="col-5 m-0 p-0">
+            <p style="margin: 0px; padding: 0px;">Vertical: </p>
+          </div>
+          <div class="col-7 m-0 p-0">
+            <p style="margin: 0px; padding: 0px;">{{caselet.vertical}}</p>
+          </div>
+          <div class="col-5 m-0 p-0">
+            <p style="margin: 0px; padding: 0px;">Practice: </p>
+          </div>
+          <div class="col-7 m-0 p-0">
+            <p style="margin: 0px; padding: 0px;">{{caselet.practice}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
+    <div #customer >
+      <h5 style="font-style: italic; color: #335362">The Customer</h5>
+      <div [innerHTML]="caselet.customer.details"></div>
+    </div>
+    <div  #projectDetails >
+      <h5 style="font-style: italic; color: #335362">Project Details</h5>
+      <div [innerHTML]="caselet.projectDetails"></div>
+    </div>
+    <div #need >
+      <h5 style="font-style: italic; color: #335362">The Need/Challenge</h5>
+      <div [innerHTML]="caselet.challenges"></div>
+    </div>
+    <div #solution >
+      <h5 style="font-style: italic; color: #335362">The Solution</h5>
+      <div [innerHTML]="caselet.solution"></div>
+    </div>
+    <div #benefit >
+      <h5 style="font-style: italic; color: #335362">Customer and Mindtree benefits</h5>
+      <div [innerHTML]="caselet.benefits"></div>
+    </div>
+    <div #summary >
+      <h5 style="font-style: italic; color: #335362">Executive summary of the caselet</h5>
+      <div [innerHTML]="caselet.executionSummary"></div>
+    </div>
+    <div #metaData >
+      <h5 style="font-style: italic; color: #335362">Meta Data</h5>
+      <div class="caselet-card mb-3">
+        <div class="caselet-header">
+          <h6 style="display: inline-block">{{caselet.title}}&nbsp;|&nbsp;</h6>
+        </div>
+        <div class="row">
+          <div style="border-right: solid 1px  #e6dfcc;" class="col-3 ml-2">
+            Customer: {{caselet.customer.name}}
+            <br />
+            Account: {{caselet.account}}
+            <br />
+            Vertical: {{caselet.vertical}}
+            <br />
+          </div>
+          <div style="border-right: solid 1px  #e6dfcc;" class="col-3">
+            Technologies: <span *ngFor="let technology of caselet.technologies">
+              {{technology}}
+            </span>
+            <br />
+            Tools: <span *ngFor="let tool of caselet.tools">
+              {{tool}}
+            </span>
+            <br />
+            Domain: {{caselet.domain}}
+            <br />
+            Serivce Offering: {{caselet.offering}}
+          </div>
+          <div style="border-right: solid 1px  #e6dfcc;" class="col">
+            <b>Tags:</b>
+            <span *ngFor="let tag of caselet.tags" class="chip-tags">
+              {{tag}}
+            </span>
+          </div>
+          <div class="col-3">
+            Executive Model: {{caselet.executiveModel}}
+            <br />
+            Engineering: {{caselet.engineering}}
+            <br />
+            Practice: {{caselet.practice}}
+            <br />
+            Contract: {{caselet.contract}}
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

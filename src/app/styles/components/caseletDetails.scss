@@ -1,0 +1,58 @@
+.caseletDetails {
+  @include sharedLiked(14px, 3.5rem);
+
+  font-size: 80%;
+
+  .scrollNav {
+    max-height: 100%;
+    width: 13%;
+    padding-top: 12rem;
+    overflow-x: hidden;
+    position: fixed;
+    font-size: 14px;
+    padding-right: 2rem;
+    .item {
+      font-size: 12px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-style: italic;
+      color: #8f9090;
+      &:hover {
+        color: #3b3c3c;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
+  .caselet {
+    margin-left: 13%;
+  }
+
+  .caseletDetailTitle {
+    font-style: italic;
+    color: #335362;
+  }
+
+  .caseletDetailAuthor {
+    color: #a2b3bc;
+  }
+
+  .smallFont {
+    font-size: 10px;
+  }
+
+  .sharedLikedDetailCaselet {
+    position: fixed;
+    margin-right: 1.5rem;
+    margin-left: 1rem;
+  }
+
+  .verticalHeightBorder {
+    border-right: solid 1px  #e6dfcc;
+  }
+
+  .verticalSeprator {
+    border-right: 1px solid lightgray;
+  }
+}
+

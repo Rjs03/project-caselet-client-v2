@@ -1,0 +1,19 @@
+.caseletFilter {
+  .userInfo {
+    display: inline-block;
+    height: 6rem;
+    .userDetails {
+      vertical-align: middle;
+      .userImage {
+        float:left;
+        width: 4rem;
+        border-radius: 50%;
+        border: solid 2px white;
+      }
+      .userName {
+        font-size: 80%;
+        overflow-wrap: break-word;
+      }
+    }
+  }
+}

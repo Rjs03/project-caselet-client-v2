@@ -1,0 +1,21 @@
+.landing {
+ .landingContent {
+    width: 87%;
+    overflow: hidden;
+  }
+  .caselets {
+    height: 80vh;
+    overflow: auto;
+    width: 100%;
+  }
+  .sharedLikedCaselets {
+    border-left: 1px solid #e7e5e6;
+    height: 80vh;
+    overflow: auto;
+  }
+  .spacing-component {
+    margin-right: 1.5rem;
+    margin-left: 1rem
+  }
+  @include sharedLiked(12px, 3.5rem);
+}

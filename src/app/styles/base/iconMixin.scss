@@ -1,0 +1,16 @@
+@mixin icon {
+  border-radius: 50%;
+  border: none;
+  color: white;
+  border: solid 1px white;
+  background-color: #41738A;
+  font-size: 12px;
+  margin-left: 0.05rem;
+  margin-right: 0.05rem;
+  &:hover {
+    background-color: #293F4A;
+  }
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,25 @@
+.sidenavcomp {
+  float: left;
+  width: 13%;
+  height: 93vh;
+  max-height: 100%;
+  background-color: $primaryColor;
+  background-image: linear-gradient($primaryColor, darken($primaryColor, 15));
+  overflow-x: hidden;
+  transition: 0.5s;
+
+ .sidenav-content {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 1rem;
+    color: #e0e4e7;
+  }
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

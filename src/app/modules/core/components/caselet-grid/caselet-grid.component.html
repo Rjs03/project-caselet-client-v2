@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row m-0 p-0">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-0 pt-0 px-3 pb-3" *ngFor="let caselet of caselets; let i = index" [attr.data-index]="i">
+      <div class="container-image">
+        <img style="width: 100%;" src={{caselet.coverImage}}>
+        <div class="overlay-image">
+        </div>
+        <div class="align-left">
+          <div class="top-left pr-2">
+            <h6 class="container-header" [routerLink]="['/caselet', caselet.id]">{{caselet.title}}</h6>
+          </div>
+        </div>
+        <span class="bottom-left">
+          <p class="caselet-author" style="margin: 0px">{{caselet.user.name}}</p>
+        </span>
+        <span class="bottom-right">
+          <button (click) = "downloadCaselet(caselet.id, caselet.title)" class="download-icon">
+            <!-- <i class="fa fa-download"></i> -->
+            <img src = "assets/icons/download.svg" style = "height: 1rem; color: white">
+          </button>
+          <button (click)="shareCaselet(caselet.id, caselet.title)" class="share-icon" data-toggle="modal" data-target="#shareModal">
+            <img src = "assets/icons/share.svg" style = "height: 1rem; color: white">
+          </button>
+          <button (click)="likeCaselet(caselet.id, i)" class="like-icon" [ngClass]="{'caselet-liked' : caselet.liked}">
+            <i class="fa fa-heart"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id = "content" style = "height: 0; overflow: hidden" #content>
+  <app-caselet-download></app-caselet-download>
+</div>
+
+<!--share caselet modal-->
+<div class="modal" id="shareModal">
+  <app-caselet-share [sharedCaseletInfo] = "sharedCaseletInfo"></app-caselet-share>
+</div>

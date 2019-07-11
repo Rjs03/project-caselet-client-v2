@@ -1,0 +1,147 @@
+<div class="sidenavcomp">
+  <div class="sidenav">
+    <div class="sidenav-content" *ngIf="filtersLoaded">
+      <div>
+        <div style="display: inline-block">
+          <div class="h6" style="vertical-align: middle;">
+            <img style="float:left; width: 30%; border-radius: 50%; border: solid 2px white; margin-right: 0.5rem" [src]="imageBlobUrl">
+            <span style="overflow-wrap: break-word; font-size: 90%;">{{name}}</span><br />
+            <span style="overflow-wrap: break-word; font-size: 70%">({{jobTitle}})</span>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <h6>Vertical</h6>
+          <div class="select">
+            <select name="slct" id="slct">
+              <option selected disabled value = "">Select Option</option>
+              <option value={{vertical.name}} *ngFor="let vertical of verticals">
+                {{vertical.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <h6>Sub Vertical</h6>
+        <div class="select">
+          <select name="slct" id="slct">
+            <option selected disabled value = "">Select Option</option>
+            <option value={{subVertical.name}} *ngFor="let subVertical of subVerticals">
+              {{subVertical.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div>
+        <h6>Practice</h6>
+        <div class="select">
+          <select (change)="onPracticeSelect($event.target.value)"  name="slct" id="slct">
+            <option selected disabled value = "">Select Option</option>
+            <option value={{practice.name}} *ngFor="let practice of practices">
+              {{practice.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div>
+        <h6>Sub Practice</h6>
+        <div class="select">
+          <select name="slct" id="slct">
+            <option value = "" selected disabled>Select Option</option>
+            <option value={{subPractice.name}} *ngFor="let subPractice of subPractices">
+              {{subPractice.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div>
+        <h6>Service Offering</h6>
+        <div class="select">
+          <select name="slct" id="slct">
+            <option value = "" selected disabled>Select Option</option>
+            <option value={{offering.name}} *ngFor="let offering of offerings">
+              {{offering.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <a data-toggle="modal" data-target="#technologyModal"><span class="icon">
+            Technology</span>
+          <i class="fa fa-plus float-right mr-2 pt-1"></i>
+        </a>
+      </div>
+      <hr>
+      <div>
+        <a data-toggle="modal" data-target="#toolModal"><span class="icon">
+            Tools</span>
+          <i class="fa fa-plus float-right mr-2 pt-1"></i>
+        </a>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+  <div class="modal popup" id="technologyModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class = "header">
+            <h4>TECHNOLOGIES</h4>
+          </div>
+          <button type="button" class="close" data-dismiss="modal">X</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class = "row">
+            <div *ngFor="let technology of technologies" class = "col-md-6 col-lg-4 ">
+                <label class="checkbox-container">{{technology.name}}
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="primary-button" data-dismiss="modal">DONE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal popup" id="toolModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <div class = "header">
+              <h4>TOOLS</h4>
+            </div>
+            <button type="button" class="close" data-dismiss="modal">X</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class = "row">
+              <div *ngFor="let tool of tools" class = "col-md-6 col-lg-4 ">
+                  <label class="checkbox-container">{{tool.name}}
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="primary-button" data-dismiss="modal">DONE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

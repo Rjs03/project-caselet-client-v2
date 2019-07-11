@@ -1,0 +1,4 @@
+<div style="width: 100%;">
+    <angular-tag-cloud *ngIf = "dataFetched" (clicked) = "tagClicked($event)" [realignOnResize] = "true" [data]="data" [width]="options.width" [height]="options.height" [overflow]="options.overflow">
+    </angular-tag-cloud>
+  </div>

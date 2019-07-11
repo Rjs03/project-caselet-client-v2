@@ -1,0 +1,165 @@
+<div class="caseletDetails" *ngIf="dataFetched">
+  <div class="pl-3 scrollNav">
+    <div>
+      <span class="item" (click)="scroll(customer)">The Customer</span><br />
+      <span class="item" (click)="scroll(projectDetails)">The Project</span><br />
+      <span class="item" (click)="scroll(need)">The Need/ Challenges</span><br />
+      <span class="item" (click)="scroll(solution)">The Solution</span><br />
+      <span class="item" (click)="scroll(benefit)">Customer and Mindtree Benefits</span><br />
+      <span class="item" (click)="scroll(summary)">Executive summary of the caselet</span><br />
+      <span class="item" (click)="scroll(metaData)">Meta Data</span><br />
+    </div>
+  </div>
+  <div class="caselet">
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <!-- Story content -->
+        <div class="col-9 ml-0 pl-0 verticalSeprator">
+          <a routerLink="/" class = "backLink">
+            < Back</a>&nbsp;&nbsp; <a routerLink="/" class = "link">Home
+          </a>&nbsp;>&nbsp;
+          <a [routerLink]="['/caselet', caselet.id]" class = "link">{{caselet.title}}</a>
+          <br />
+          <br />
+          <div class="row">
+            <div class="col-7">
+              <h4 class = "caseletDetailTitle">{{caselet.title}}</h4>
+              <p class = "caseletDetailAuthor">| Author's Name : {{caselet.user.name}}</p>
+            </div>
+            <div class="col smallFont">
+              <div class="row">
+                <div class="col-5">
+                  <div class="row">
+                    <div class="col-5 m-0 p-0">
+                        <p class="m-0 p-0">Customer :</p>
+                    </div>
+                    <div class="col-7 m-0 p-0 mb-1">
+                      {{caselet.customer.name}}
+                    </div>
+                    <div class="col-5 m-0 p-0">
+                      <p style="margin: 0px; padding: 0px;">Account :</p>
+                    </div>
+                    <div class="col-7 m-0 p-0 mb-1">
+                      <p style="margin: 0px; padding: 0px;">{{caselet.account.name}}</p>
+                    </div>
+                    <div class="col-5 m-0 p-0">
+                      <p style="margin: 0px; padding: 0px;">Vertical :</p>
+                    </div>
+                    <div class="col-7 m-0 p-0 mb-1">
+                      <p style="margin: 0px; padding: 0px;">{{caselet.vertical.name}}</p>
+                    </div>
+                    <div class="col-5 m-0 p-0">
+                      <p style="margin: 0px; padding: 0px;">Practice :</p>
+                    </div>
+                    <div class="col-7 m-0 p-0 mb-1">
+                      <p style="margin: 0px; padding: 0px;">{{caselet.practice.name}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class = "row">
+                    <div class = "col-5">
+                      Experts :
+                    </div>
+                    <div class = "col-7">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr style="border-top: 1px solid #4e6976; color: #4e6976;">
+          <div>
+            <div #customer>
+              <h5 style="font-style: italic;">The Customer</h5>
+              <div [innerHTML]="caselet.customer.details"></div>
+            </div>
+            <br />
+            <div #projectDetails>
+              <h5 style="font-style: italic;">The Project</h5>
+              <div class = "ptag" [innerHTML]="caselet.projectDetails"></div>
+            </div>
+            <br />
+            <div #need>
+              <h5 style="font-style: italic;">The Need/Challenge</h5>
+              <div [innerHTML]="caselet.challenges"></div>
+            </div>
+            <br />
+            <div #solution>
+              <h5 style="font-style: italic;">The Solution</h5>
+              <div [innerHTML]="caselet.solution"></div>
+            </div>
+            <br />
+            <div #benefit>
+              <h5 style="font-style: italic;">Customer and Mindtree benefits</h5>
+              <div [innerHTML]="caselet.benefits"></div>
+            </div>
+            <br />
+            <div #summary>
+              <h5 style="font-style: italic;">Executive summary of the caselet</h5>
+              <div [innerHTML]="caselet.executionSummary"></div>
+            </div>
+            <br />
+            <div #metaData>
+              <h5 style="font-style: italic;">Meta Data</h5>
+              <div class="caselet-card mb-3">
+                <div class="caselet-header">
+                  <h6 style="display: inline-block; margin: 0px">{{caselet.title}}&nbsp;|&nbsp;</h6>
+                  <p style="display: inline-block; margin: 0px">Author's Name: {{caselet.user.name}}</p>
+                  <div class="float-right">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3 ml-2 verticalHeightBorder">
+                    <b>Customer:</b> {{caselet.customer.name}}
+                    <br />
+                    <b>Account:</b> {{caselet.account.name}}
+                    <br />
+                    <b>Vertical:</b> {{caselet.vertical.name}}
+                    <br />
+                  </div>
+                  <div class="col-3 verticalHeightBorder">
+                    <b>Technologies:</b> <span *ngFor="let technology of caselet.technologies">
+                      {{technology.name}}
+                    </span>
+                    <br />
+                    <b>Tools:</b> <span *ngFor="let tool of caselet.tools">
+                      {{tool.name}}
+                    </span>
+                    <br />
+                    <b>Domain:</b> {{caselet.domain}}
+                    <br />
+                    <b>Service Offering:</b> {{caselet.offering.name}}
+                  </div>
+                  <div class="col verticalHeightBorder">
+                    <b>Tags:</b>
+                    <span *ngFor="let tag of caselet.tags" class="chip-tags">
+                      {{tag.name}}
+                    </span>
+                  </div>
+                  <div class="col-3">
+                    <b>Engineering:</b> {{caselet.engineering}}
+                    <br />
+                    <b>Practice:</b> {{caselet.practice.name}}
+                    <br />
+                    <b>Contract:</b> {{caselet.contract.name}}
+                    <br />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+          </div>
+        </div>
+        <div class="col">
+          <div class = "sharedLikedDetailCaselet">
+            <app-most-shared-caselets></app-most-shared-caselets>
+            <hr>
+            <app-most-liked-caselets></app-most-liked-caselets>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

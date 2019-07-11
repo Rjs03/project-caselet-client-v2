@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import './app/styles/main.scss';
+
+html {
+  font-size: 14px;
+  overflow-y: scroll;
+}
+
+.ptag {
+  p {
+    margin: 0px;
+    padding: 0px;
+  }
+}

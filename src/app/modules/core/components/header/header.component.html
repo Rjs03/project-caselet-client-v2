@@ -1,0 +1,31 @@
+<nav class="navbar sticky-top fixed-top navbar-expand-lg header pl-0 py-0">
+  <div class="logo mr-4">
+    <h4 routerLink="/" style="color: white; display: inline-block;">PROJECT CASELET</h4>
+  </div>
+  <div class="contentToDisplay">
+    <a routerLink="/user/addCaselet">
+      <button class="add-caselet">Add Caselet</button></a>&nbsp;&nbsp;
+
+    <div class="searchBar">
+      <input type="search" [(ngModel)]="searchValue" placeholder="Search">
+      <button class="searchButton" (click)="searchData()">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+    &nbsp;&nbsp;
+    <!-- <img class="profileImage" [src]="imageUrl"> -->
+    <div class="dropdown menuToDisplay">
+      <button class="btn btn-secondary dropdown-toggle menuButton" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="no-style" href="https://yorbit.mindtree.com"><button class="dropdown-item"
+            type="button">Yorbit</button></a>
+        <button *ngIf="role == 'admin'" routerLink="/user/admin/pendingCaselets" class="dropdown-item"
+          type="button">Pending Caselets</button>
+        <button class="dropdown-item" routerLink="/support" type="button">Help</button>
+      </div>
+    </div>
+  </div>
+</nav>

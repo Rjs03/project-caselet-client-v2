@@ -1,0 +1,17 @@
+.like-icon {
+  @include icon();
+}
+
+.share-icon {
+  @include icon();
+}
+
+.download-icon {
+  @include icon();
+}
+
+.caselet-liked {
+  fill: #f7b866;
+  // background-color: #f7b866;
+  color: #f7b866;
+}

@@ -1,0 +1,7 @@
+.primary-button {
+    @include button($primaryColor, $normalFontSize);
+}
+
+.secondary-button {
+    @include button(#ad954f, $normalFontSize);
+}

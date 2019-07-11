@@ -1,0 +1,31 @@
+.customizedToolTip {
+  cursor: pointer;
+}
+
+.customizedToolTip span {
+  display: none;
+  color: lightgray;
+  text-decoration: none;
+  padding: 3px;
+  p {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+.customizedToolTip:hover span {
+  display: block;
+  position: absolute;
+  background-color: lightgray;
+  color: black;
+  border: 1px solid lightgray;
+  margin: 2px 2px;
+  padding: 0px;
+  margin-bottom: 0px;
+  z-index: 2;
+  p {
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 0px;
+  }
+}

@@ -1,0 +1,40 @@
+.caseletForm {
+  .rejectComment {
+    color: red;
+  }
+
+  .stepHeader {
+    font-style: italic;
+    color: #4e6976
+  }
+
+  .stepSeprator {
+    border-top: 2px solid #4e6976;
+    color: #4e6976;
+  }
+
+  .tagInput {
+    text-transform: uppercase;
+    border: solid 1px #e8ecee;
+    border-radius: 2%;
+  }
+
+  .coverImage {
+    width: 3rem;
+  }
+
+  .toolTipInfo {
+    font-size: 16px;
+    max-width: 60rem
+  }
+
+  .toolTipInfoSmall {
+    font-size: 12px;
+    max-width: 30rem;
+    height: 2rem;
+  }
+
+  .fileButton {
+    display: none;
+  }
+}

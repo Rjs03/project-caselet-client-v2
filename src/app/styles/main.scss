@@ -1,0 +1,40 @@
+// importing variables
+@import './variables/colors.scss';
+@import './variables/fontSizes.scss';
+
+// base or mixins
+@import './base/buttonMixin.scss';
+@import './base/cardMixin.scss';
+@import './base/chipMixin.scss';
+@import './base/iconMixin.scss';
+@import './base/sharedLikedMixin.scss';
+
+// importing elements
+@import './elements/breadCrumbLink.scss';
+@import './elements/buttons.scss';
+@import './elements/dropDown.scss';
+@import './elements/chip.scss';
+@import './elements/scrollBar.scss';
+@import './elements/tags.scss';
+@import './elements/customizedToolTip.scss';
+@import './elements/searchBar.scss';
+@import './elements/icons.scss';
+@import './elements/notAvailableText.scss';
+@import './elements/popup.scss';
+
+// importing layout
+@import './layout/sideNav.scss';
+@import './layout/header.scss';
+
+// importing components
+@import './components/preview.scss';
+@import './components/tag-cloud.scss';
+@import './components/results.scss';
+@import './components/story-list.scss';
+@import './components/story-card.scss';
+@import './components/projectDetails.scss';
+@import './components/landingComponent.scss';
+@import './components/caseletForm.scss';
+@import './components/caseletDetails.scss';
+@import './components/caseletSupport.scss';
+@import './components/tags.scss';

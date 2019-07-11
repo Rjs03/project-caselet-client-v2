@@ -1,0 +1,21 @@
+.caselet-card {
+    @include card();
+    .caselet-title {
+      white-space: nowrap;
+      max-width: 50%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0px;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .caselet-author {
+      white-space: nowrap;
+      width: 30%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0px;
+      display: inline-block;
+    }
+}

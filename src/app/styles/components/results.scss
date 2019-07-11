@@ -1,0 +1,39 @@
+.results {
+   .results-heading {
+        .disabled-text {
+          color: grey;
+          margin-top: 1rem;
+        }
+        .refresh-caselets {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        h4 {
+            display:inline;
+        }
+        .display-view {
+            color:#243a45;
+        }
+        .display-button {
+            color: grey;
+            background-color: transparent;
+            border: none;
+            margin-bottom: 0.3rem;
+            &:disabled {
+                color:#243a45;
+                background-color: lightgrey;
+                border-radius: 10%;
+            }
+        }
+
+    }
+    .visible {
+        display: block;
+      }
+
+      .hidden {
+        display: none;
+      }
+}
+

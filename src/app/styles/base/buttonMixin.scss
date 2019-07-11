@@ -1,0 +1,21 @@
+@mixin button($color, $fontSize) {
+    /* Button style */
+    border: none;
+    border-radius: $fontSize *  0.25rem;
+    padding: ($fontSize * 0.5rem)  ($fontSize * 1rem);
+    font-size: $fontSize * 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    background-color: $color;
+    box-shadow: 0 0 4px #999;
+    outline: none;
+    background-position: center;
+    // transition: 0.8s;
+    &:hover {
+      background: darken($color, 5);
+    }
+    &:focus {
+      outline: none;
+    }
+  }

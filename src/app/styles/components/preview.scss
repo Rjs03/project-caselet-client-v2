@@ -1,0 +1,7 @@
+.preview {
+  width: 70%;
+  .caseletPreview {
+    height: calc(100vh - 12.5rem);
+    overflow-y : auto;
+  }
+}

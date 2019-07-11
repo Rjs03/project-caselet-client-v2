@@ -1,0 +1,113 @@
+.popup {
+  .modal-header {
+    border: 0;
+    padding: 0.5rem !important;
+    color: white;
+    background-color: $header-background-color;
+    position: relative;
+    .header{
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .modal-header .close {
+    margin: 0 !important;
+    padding: 0rem 0 0rem 0!important;
+    position: absolute;
+    top: -0.75rem;
+    right: -0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: #e1e5e9;
+    color: black !important;
+    border: 0.1rem solid black;
+    font-size: 1.2rem;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    z-index: 10;
+  }
+
+  .modal-body {
+      padding: 2rem;
+      height: 60vh;
+      overflow: auto;
+  }
+
+  .checkbox-container {
+    display: block;
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 1.8rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+  }
+
+  /* Create a custom checkbox */
+  .checkmark {
+    margin-top: 1.8px;
+    position: absolute;
+    left: 0;
+    height: 1.08rem;
+    width: 1.08rem;
+    border: solid #a9abaa 0.03125rem;
+    border-radius: 20%;
+    -moz-box-shadow:    inset 4px 4px 5px -4px #a9abaa;
+    -webkit-box-shadow: inset 4px 4px 5px -4px #a9abaa;
+    box-shadow:         inset 4px 4px 5px -4px #a9abaa;
+  }
+
+  /* On mouse-over, add a grey background color */
+  .checkbox-container:hover input ~ .checkmark {
+    background-color: darken(#a9abaa, 3);
+  }
+
+  /* When the checkbox is checked, add a blue background */
+  .checkbox-container input:checked ~ .checkmark {
+    background-color: $primaryColor;
+    -moz-box-shadow:    none;
+    -webkit-box-shadow: none;
+    box-shadow:         none;
+  }
+
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  /* Show the checkmark when checked */
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+
+  /* Style the checkmark/indicator */
+  .checkbox-container .checkmark:after {
+    left: 4.5px;
+    top: 2.5px;
+    width: 4.5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 1px 1px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+}
+

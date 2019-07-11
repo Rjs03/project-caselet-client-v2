@@ -1,0 +1,87 @@
+angular-tag-cloud ::ng-deep {
+  font-family: sans-serif;
+  width: 100%;
+  font-size: 10px;
+  background: #2a4450;
+}
+
+/* no decoration for links */
+angular-tag-cloud ::ng-deep span > a {
+  text-decoration: none;
+}
+
+
+
+// on hover tag cloud color
+// $onHoverTagText: #ad954f;
+// $onHoverTagBackground: #947f46;
+
+$onHoverTagText: white;
+$onHoverTagBackground: #4d7d93;
+
+
+$colorEven: #4c7d92;
+$colorOdd: #4b7c91;
+$backgroundColorEven: #304e5b;
+$backgroundColorOdd: #304e5b;
+
+@mixin commonTag($tagSize, $color, $background, $fontSize) {
+  font-size: $tagSize;
+  color: $color;
+  border-radius: 5px;
+  background: $background;
+  display: inline-block;
+  margin: $fontSize * 1rem;
+  padding-left: $fontSize*0.8rem;
+  padding-right: $fontSize*0.8rem;
+  padding-top: $fontSize*0.2rem;
+  padding-bottom: $fontSize*0.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  &:hover{
+    color:$onHoverTagText;
+    background: $onHoverTagBackground;
+  }
+}
+
+ /* font sizes */
+angular-tag-cloud ::ng-deep span.w10 {
+    @include commonTag(370%, $colorEven, $backgroundColorEven, 1);
+}
+
+angular-tag-cloud ::ng-deep span.w9  {
+  @include commonTag(340%, $colorOdd, $backgroundColorOdd, 0.9);
+}
+
+angular-tag-cloud ::ng-deep span.w8  {
+  @include commonTag(310%, $colorEven, $backgroundColorEven, 0.8);
+}
+
+angular-tag-cloud ::ng-deep span.w7  {
+  @include commonTag(280%, $colorOdd, $backgroundColorOdd, 0.7);
+}
+
+angular-tag-cloud ::ng-deep span.w6  {
+  @include commonTag(250%, $colorEven, $backgroundColorEven, 0.6);
+}
+
+angular-tag-cloud ::ng-deep span.w5  {
+  @include commonTag(220%, $colorOdd, $backgroundColorOdd, 0.5);
+}
+
+angular-tag-cloud ::ng-deep span.w4  {
+  @include commonTag(190%, $colorEven, $backgroundColorEven, 0.4);
+}
+
+angular-tag-cloud ::ng-deep span.w3  {
+  @include commonTag(160%, $colorOdd, $backgroundColorOdd, 0.3);
+}
+
+angular-tag-cloud ::ng-deep span.w2  {
+  @include commonTag(130%, $colorEven, $backgroundColorEven, 0.2);
+}
+
+angular-tag-cloud ::ng-deep span.w1  {
+  @include commonTag(100%, $colorOdd, $backgroundColorOdd, 0.1);
+}
