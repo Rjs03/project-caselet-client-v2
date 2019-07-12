@@ -15,16 +15,16 @@
       <div class="row">
         <!-- Story content -->
         <div class="col-9 ml-0 pl-0 verticalSeprator">
-          <a routerLink="/" class = "backLink">
-            < Back</a>&nbsp;&nbsp; <a routerLink="/" class = "link">Home
+          <a routerLink="/" class="backLink">
+            < Back</a>&nbsp;&nbsp; <a routerLink="/" class="link">Home
           </a>&nbsp;>&nbsp;
-          <a [routerLink]="['/caselet', caselet.id]" class = "link">{{caselet.title}}</a>
+          <a [routerLink]="['/caselet', caselet.id]" class="link">{{caselet.title}}</a>
           <br />
           <br />
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-7">
               <h4 class = "caseletDetailTitle">{{caselet.title}}</h4>
-              <p class = "caseletDetailAuthor">| Author's Name : {{caselet.user.name}}</p>
+              <p class = "caseletDetailAuthor">| Author's Name : {{caselet.userName}}</p>
             </div>
             <div class="col smallFont">
               <div class="row">
@@ -67,7 +67,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
+          <h4 class="caseletDetailTitle">{{caselet.title}}</h4>
+          <p class="caseletDetailAuthor">| Author's Name : {{caselet.userName}}</p>
           <hr style="border-top: 1px solid #4e6976; color: #4e6976;">
           <div>
             <div #customer>
@@ -77,7 +79,7 @@
             <br />
             <div #projectDetails>
               <h5 style="font-style: italic;">The Project</h5>
-              <div class = "ptag" [innerHTML]="caselet.projectDetails"></div>
+              <div class="ptag" [innerHTML]="caselet.projectDetails"></div>
             </div>
             <br />
             <div #need>
@@ -105,7 +107,7 @@
               <div class="caselet-card mb-3">
                 <div class="caselet-header">
                   <h6 style="display: inline-block; margin: 0px">{{caselet.title}}&nbsp;|&nbsp;</h6>
-                  <p style="display: inline-block; margin: 0px">Author's Name: {{caselet.user.name}}</p>
+                  <p style="display: inline-block; margin: 0px">Author's Name: {{caselet.userName}}</p>
                   <div class="float-right">
                   </div>
                 </div>
@@ -127,7 +129,8 @@
                       {{tool.name}}
                     </span>
                     <br />
-                    <b>Domain:</b> {{caselet.domain}}
+                    <span *ngIf="caselet.domain != null">{{caselet.domain}}</span>
+                    <span *ngIf="caselet.domain == null" class="notAvailable">NA</span>
                     <br />
                     <b>Service Offering:</b> {{caselet.offering.name}}
                   </div>
@@ -138,7 +141,8 @@
                     </span>
                   </div>
                   <div class="col-3">
-                    <b>Engineering:</b> {{caselet.engineering}}
+                    <span *ngIf="caselet.engineering != null">{{caselet.engineering}}</span>
+                    <span *ngIf="caselet.engineering == null" class="notAvailable">NA</span>
                     <br />
                     <b>Practice:</b> {{caselet.practice.name}}
                     <br />
@@ -153,7 +157,7 @@
           </div>
         </div>
         <div class="col">
-          <div class = "sharedLikedDetailCaselet">
+          <div class="sharedLikedDetailCaselet">
             <app-most-shared-caselets></app-most-shared-caselets>
             <hr>
             <app-most-liked-caselets></app-most-liked-caselets>

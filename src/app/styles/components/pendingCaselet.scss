@@ -1,0 +1,74 @@
+.pending-caselet {
+
+  .container-fluid {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .page-heading {
+    font-style: italic;
+    color: $primaryColor;
+  }
+
+  .separator {
+    border-top: 0.08rem solid $separatorColor;
+    color: $separatorColor;
+    margin: 0;
+  }
+
+  .caselet-title {
+    white-space: nowrap;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0px;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .caselet-author {
+    white-space: nowrap;
+    width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0px;
+    display: inline-block;
+  }
+
+  .open-link {
+    cursor: pointer;
+    margin-right: 1rem;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .row {
+    margin: 0;
+    padding: 0.5rem;
+    &:hover {
+      background: #EDEDED;
+    }
+  }
+
+  button.collapsed {
+    i {
+      transform: rotate(-180deg);
+    }
+  }
+
+  .arrow-button {
+    background: none;
+    border: none;
+    color: $primaryColor;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .caselet-status-icon {
+    height: 1.3rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}

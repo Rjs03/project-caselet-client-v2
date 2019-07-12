@@ -22,14 +22,11 @@ export class MostLikedCaseletsComponent implements OnInit {
     this.caseletService.getMostLikedCaselet().subscribe((response: any) => {
       this.dataFetched = true;
       response.data.projects.map((project) => {
-        this.dataService.getUserName(project.user.mid).subscribe((userData) => {
-          project.user.name = userData.value[0].displayName;
+        this.dataService.getUserName(project.userMid).subscribe((userData) => {
+          project.userName = userData.value[0].displayName;
         });
       });
       this.caselets = response.data.projects;
     });
-  }
-  trial(id) {
-    //console.log(id);
   }
 }

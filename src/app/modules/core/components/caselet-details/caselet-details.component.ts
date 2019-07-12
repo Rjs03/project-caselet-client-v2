@@ -22,8 +22,8 @@ export class CaseletDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.caseletId = params['caseletId'];
       this.caseletService.getCaseletById(this.caseletId).subscribe((response: any) => {
-        this.dataService.getUserName(response.data.project.user.mid).subscribe((responseName: any) => {
-          response.data.project.user.name = responseName.value[0].displayName;
+        this.dataService.getUserName(response.data.project.userMid).subscribe((responseName: any) => {
+          response.data.project.userName = responseName.value[0].displayName;
         });
         this.caselet = response.data.project;
         this.dataFetched = true;

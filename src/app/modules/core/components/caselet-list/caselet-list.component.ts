@@ -15,11 +15,11 @@ export class CaseletListComponent implements OnInit {
 
   }
 
-  likeCaselet(caseletId, i) {
-    console.log(caseletId, i);
-    this.caseletService.likeCaselet(caseletId).subscribe((response: any) => {
-      this.caselets[i].liked = !this.caselets[i].liked;
-    });
-  }
+  // likeCaselet(caseletId, i) {
+  //   console.log(caseletId, i);
+  //   this.caseletService.likeCaselet(caseletId).subscribe((response: any) => {
+  //     this.caselets[i].liked = !this.caselets[i].liked;
+  //   });
+  // }
 
 }

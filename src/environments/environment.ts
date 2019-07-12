@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  serverUrl: 'https://yorbitst.azurewebsites.net/projectcaseletsapi/',
+  serverUrl: 'http://localhost:3000/projectcaseletsapi/',
   login: 'user/',
   filter: 'filter/',
   caselet: 'caselet/',

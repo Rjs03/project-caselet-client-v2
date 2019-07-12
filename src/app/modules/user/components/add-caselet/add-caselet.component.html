@@ -10,7 +10,7 @@
     </div>
     <div *ngIf="stepCount == 1">
       <h4 class="stepHeader">Basic Information</h4>
-      <hr class="stepSeprator">
+      <hr class="step-separator">
       <label for="title">
         <h6>Title of the caselet</h6>
       </label>
@@ -24,7 +24,7 @@
           </span>
         </h6>
       </label>
-      <tag-input (onTextChange)="expertsFunctionCall($event)" formControlName="experts" theme="bootstrap"
+      <tag-input (onTextChange)="expertsFunctionCall($event)" formControlName="experts" [theme]="'ngxtag-theme'"
         secondaryPlaceholder="Enter Experts" placeholder="+Expert" class="tagInput" [onlyFromAutocomplete]="false">
         <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="expNam" [identifyBy]="'mid'"
           [displayBy]="'name'">
@@ -39,7 +39,7 @@
           </span>
         </h6>
       </label>
-      <tag-input [modelAsStrings]=true formControlName="tags" theme="bootstrap" secondaryPlaceholder="Enter tag"
+      <tag-input [modelAsStrings]=true formControlName="tags" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter tag"
         placeholder="+Tag" class="tagInput"></tag-input><br />
       <br />
       <div *ngIf="imageUploaded == true">
@@ -54,7 +54,7 @@
     </div>
     <div *ngIf="stepCount == 2">
       <h4 class="stepHeader">Meta Data</h4>
-      <hr class="stepSeprator">
+      <hr class="step-separator">
       <div class="row">
         <div class="col-6">
           <label for="technologies">
@@ -66,7 +66,7 @@
               </span>
             </h6>
           </label>
-          <tag-input [modelAsStrings]=true formControlName="technologies" theme="bootstrap"
+          <tag-input [modelAsStrings]=true formControlName="technologies" [theme]="'ngxtag-theme'"
             secondaryPlaceholder="Enter technology" placeholder="+Technology" [onlyFromAutocomplete]="false"
             class="tagInput">
             <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="someTechnologies">
@@ -83,7 +83,7 @@
               </span>
             </h6>
           </label>
-          <tag-input [modelAsStrings]=true formControlName="tools" theme="bootstrap" secondaryPlaceholder="Enter tool"
+          <tag-input [modelAsStrings]=true formControlName="tools" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter tool"
             placeholder="+Tool" class="tagInput"></tag-input><br />
         </div>
         <div class="col-6 mb-3">
@@ -98,7 +98,7 @@
         </div>
         <div class="col-6 mb-3">
           <h6>Account</h6>
-          <input list = "accounts" formControlName="account" class="form-control" id="account"
+          <input [attr.list] = "caseletForm.get('account').value.length > 2 ? 'accounts' : null" formControlName="account" class="form-control" id="account"
             placeholder="Enter Account" style = "width: 100%">
             <datalist id="accounts">
               <option *ngFor = "let account of accounts" [value] = "account">
@@ -166,7 +166,7 @@
           </p>
         </span>
       </h4>
-      <hr class="stepSeprator">
+      <hr class="step-separator">
       <label for="customerName">
         <h6>Customer Name</h6>
       </label>
@@ -188,7 +188,7 @@
         <i class="fa fa-info-circle"></i>
         <span class="toolTipInfo">(What is this project all about?)</span>
       </h4>
-      <hr class="stepSeprator">
+      <hr class="step-separator">
       <quill-editor #projectDetails [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="projectDetails" (onEditorCreated)="getEditorInstance($event)">
       </quill-editor>
@@ -207,7 +207,7 @@
           Why did they feel the need for this? What challenge currently customer is facing due to which need has come?
           What challenges were they facing? What did they want to achieve as a result of this project?)</span>
       </h4>
-      <hr class="stepSeprator">
+      <hr class="step-separator">
       <quill-editor #needChallenges [theme]="snow" [styles]=editorStyle [modules]="modules"
         formControlName="needChallenges" (onEditorCreated)="getEditorInstance($event)">
       </quill-editor>
@@ -227,7 +227,7 @@
           in
           this area)</span>
       </h4>
-      <hr class="stepSeprator">
+      <hr class="step-separator">
       <quill-editor #solutionProvided [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="solutionProvided" (onEditorCreated)="getEditorInstance($event)">
       </quill-editor>
@@ -266,7 +266,7 @@
           rapidly
           become acquainted with a large body of caselet without having to read it all)</span>
       </h4>
-      <hr class="stepSeprator">
+      <hr class="step-separator">
       <quill-editor #executiveSummaryOfTheCaselet [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="executiveSummaryOfTheCaselet" (onEditorCreated)="getEditorInstance($event)">
       </quill-editor>
@@ -277,7 +277,7 @@
       <br />
       <br />
     </div>
-    <hr class="stepSeprator">
+    <hr class="step-separator">
     <div class="mb-5">
       <div class="float-right mb-5">
         <button type="button" (click)="onSaveCaselet()" class="secondary-button mx-2">SAVE</button>

@@ -35,8 +35,8 @@ export class CaseletsComponent implements OnInit {
   getCaselets() {
     this.caseletService.getCaselets(this.pageNo, this.limit).subscribe((response: any) => {
       response.data.projects.map((project) => {
-        this.dataService.getUserName(project.user.mid).subscribe((responseName: any) => {
-          project.user.name = responseName.value[0].displayName;
+        this.dataService.getUserName(project.userMid).subscribe((responseName: any) => {
+          project.userName = responseName.value[0].displayName;
         });
       });
       this.caseletsToAdd.push(...response.data.projects);

@@ -8,8 +8,8 @@
     color: #4e6976
   }
 
-  .stepSeprator {
-    border-top: 2px solid #4e6976;
+  .step-separator {
+    border-top: 1px solid #4e6976;
     color: #4e6976;
   }
 
@@ -36,5 +36,9 @@
 
   .fileButton {
     display: none;
+  }
+
+  .custom-select {
+    border: #ced4da solid 1px !important;
   }
 }

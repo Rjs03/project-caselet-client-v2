@@ -2,7 +2,7 @@
   <div>
     <div class="caselet-header">
           <h6 [routerLink]="['/caselet', caselet.id]" class = "caselet-title">{{caselet.title}}&nbsp;</h6>
-          <p class = "caselet-author">|&nbsp;Author's Name: {{caselet.user.name}}</p>
+          <p class = "caselet-author">|&nbsp;Author's Name: {{caselet.userName}}</p>
       <div class="float-right">
         <button class="download-icon">
           <i class="fa fa-download"></i>
@@ -23,8 +23,8 @@
         <b>Vertical:</b> {{caselet.vertical.name}}
         <br />
         <b>Domain: </b>
-        <span *ngIf = "caselet.domain.length != 0">{{caselet.domain}}</span>
-        <span *ngIf = "caselet.domain.length == 0" class = "notAvailable">NA</span>
+        <span *ngIf = "caselet.domain != null">{{caselet.domain}}</span>
+        <span *ngIf = "caselet.domain == null" class = "notAvailable">NA</span>
         <br />
         <br />
       </div>
@@ -61,8 +61,8 @@
         <b>Service Offering:</b> {{caselet.offering.name}}
         <br />
         <b>Engineering: </b>
-        <span *ngIf = "caselet.engineering.length != 0">{{caselet.engineering}}</span>
-        <span *ngIf = "caselet.engineering.length == 0" class = "notAvailable">NA</span>
+        <span *ngIf = "caselet.engineering != null">{{caselet.engineering}}</span>
+        <span *ngIf = "caselet.engineering == null" class = "notAvailable">NA</span>
         <br />
         <br />
       </div>

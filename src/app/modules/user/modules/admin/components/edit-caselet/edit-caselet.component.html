@@ -21,7 +21,7 @@
       <input formControlName="experts" type="search" class="form-control" id="experts"
         placeholder="Enter experts"><br />
       <h6>Tags</h6>
-      <tag-input  [modelAsStrings] = true  formControlName="tags" theme="bootstrap" secondaryPlaceholder="Enter tag" placeholder="+Tag"
+      <tag-input  [modelAsStrings] = true  formControlName="tags" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter tag" placeholder="+Tag"
             style=" text-transform: uppercase; border: solid 1px #e8ecee; border-radius: 2%;"></tag-input><br />
       <br />
       <input *ngIf="admin" type="file" (change)="fileChange($event)">
@@ -41,7 +41,7 @@
       <div class="row">
         <div class="col-6">
           <h6>Technology</h6>
-          <tag-input formControlName="technologies" theme="bootstrap" secondaryPlaceholder="Enter technology"
+          <tag-input formControlName="technologies" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter technology"
             placeholder="+Technology" [onlyFromAutocomplete]="false"
             style=" text-transform: uppercase; border: solid 1px #e8ecee; border-radius: 2%;">
             <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="someTechnologies">
@@ -50,7 +50,7 @@
         </div>
         <div class="col-6">
           <h6>Tools</h6>
-          <tag-input formControlName="tools" theme="bootstrap" secondaryPlaceholder="Enter tool" placeholder="+Tool"
+          <tag-input formControlName="tools" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter tool" placeholder="+Tool"
             style=" text-transform: uppercase; border: solid 1px #e8ecee; border-radius: 2%;"></tag-input><br />
         </div>
         <div class="col-6 mb-3">

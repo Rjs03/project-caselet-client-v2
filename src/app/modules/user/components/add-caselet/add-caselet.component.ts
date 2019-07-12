@@ -121,7 +121,7 @@ export class AddCaseletComponent implements OnInit {
   getPendingCaselet(caseletId) {
     this.caseletSerivce.getPendingCaselet(caseletId).subscribe((response: any) => {
       this.storyAdded = response.data.project;
-      this.mid = response.data.project.user.mid;
+      this.mid = response.data.project.userMid;
       this.author = response.data.project.user.name;
       this.patchingValueToForm(this.storyAdded);
     });
