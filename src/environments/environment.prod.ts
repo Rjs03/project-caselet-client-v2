@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   // previous deployment
   // serverUrl: 'https://projectcaselets-api.azurewebsites.net/',
-  //serverUrl: 'https://yorbitst.azurewebsites.net/projectcaseletsapi/',
+  // serverUrl: 'https://yorbitst.azurewebsites.net/projectcaseletsapi/',
   serverUrl: 'https://yorbit.mindtree.com/projectcaseletsapi/',
   login: 'user/',
   filter: 'filter/',
@@ -10,6 +10,7 @@ export const environment = {
   save: 'save/',
   image: 'image/',
   admin: 'admin/',
+  list: 'list/',
   search: 'search',
   tags: 'tags/',
   searchTag: 'searchTag',

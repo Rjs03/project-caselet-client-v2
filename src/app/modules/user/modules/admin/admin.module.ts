@@ -6,6 +6,7 @@ import { EditCaseletComponent } from './components/edit-caselet/edit-caselet.com
 import { TagInputModule } from 'ngx-chips';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [PendingCaseletsComponent, EditCaseletComponent],
@@ -14,6 +15,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     AdminRoutingModule,
     TagInputModule,
     QuillModule,
+    HttpClientModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     FormsModule
   ]

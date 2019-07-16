@@ -12,4 +12,16 @@ export class FilterService {
   getfilters() {
     return this.httpClient.get(environment.serverUrl + environment.filter);
   }
+
+  getMetaData () {
+    return this.httpClient.get(environment.serverUrl + environment.metadata);
+  }
+
+  getTechnologies() {
+    return this.httpClient.get(environment.serverUrl + environment.filter + environment.technologies);
+  }
+
+  getTools() {
+    return this.httpClient.get(environment.serverUrl + environment.filter + environment.tools);
+  }
 }

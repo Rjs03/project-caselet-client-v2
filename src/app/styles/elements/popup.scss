@@ -109,5 +109,10 @@
     transform: rotate(45deg);
   }
 
+  .filter-name {
+    // display: inline-block;
+    text-transform: capitalize;
+  }
+
 }
 

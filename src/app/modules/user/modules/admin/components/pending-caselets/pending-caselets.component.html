@@ -1,32 +1,73 @@
-<div class = "pending-caselet">
+<div class="pending-caselet">
   <div class="container-fluid mt-3">
-  <!-- <div *ngIf="dataFetched"> -->
-  <h4 class = "page-heading">Submitted Caselets</h4>
-  <select class = "form-control">
-    <option>Please Select</option>
-  </select>
-  <br />
-  <hr class="separator">
-  <div *ngFor="let caselet of submittedCaselets">
-    <div class="row">
-      <div class="col-9 m-0 p-0">
-        <p class="caselet-title"><b>{{caselet.title | uppercase}}</b>&nbsp;</p>
-        <p class="caselet-author">| {{caselet.authorName}}</p>
+    <!-- <div *ngIf="dataFetched"> -->
+    <h4 class="page-heading">Submitted Caselets</h4>
+    <br />
+    <form>
+      <div>
+        <p class = "display-inline display-form-width">
+        Filter By Type:&nbsp;
+        </p>
+        <select  (change)="onStatusSelect($event.target.value)" (select) = "addFilterType()" style="width: 50%;" class="form-control custom-select display-inline display-form-width">
+          <option>All</option>
+          <option>Approved</option>
+          <option>Sent Back</option>
+          <option>Submitted</option>
+        </select>
+        <p class = "display-inline display-form-width">
+        Filter By Admin Name:&nbsp;
+        </p>
+        <select (change)="onAdminNameSelect($event.target.value)" class="form-control custom-select display-inline display-form-width">
+            <option value="">Please Select</option>
+            <option *ngFor="let admin of adminNames" value={{admin.mid}}>{{admin.name}}</option>
+        </select>
+        <div class = "float-right display-inline">
+            <input class = "date-picker form-control" (change)="onFromDateChange($event.target.value)" type = "date" />&nbsp;&nbsp;
+            <button (click) = "resetFilters()" type = "reset" class = "primary-button"><img src = "assets/icons/reset.svg" class = "button-icon" /> RESET </button>
+          </div>
       </div>
-      <div class="col-3 m-0 p-0">
-        <span class="float-right">
-            <img *ngIf = "caselet.status == 'Approved'" src = "assets/icons/caselet-approved.svg" class = "caselet-status-icon">
-            <span class = "open-link" [routerLink]="['/user/admin/approveCaselet', caselet.id]">
+  </form>
+    <br />
+    <hr class="separator">
+    <div *ngFor="let caselet of submittedCaselets">
+      <div class="row custom-row">
+        <div class="col-9 m-0 p-0">
+          <p class="caselet-title"><b>{{caselet.title | uppercase}}</b>&nbsp;</p>
+          <p class="caselet-author">| {{caselet.authorName}}</p>
+        </div>
+        <div class="col-3 m-0 p-0">
+          <span class="float-right">
+            <img *ngIf="caselet.status == 'Approved'" src="assets/icons/caselet-approved.svg"
+              class="caselet-status-icon">
+            <img *ngIf="caselet.status == 'Submitted'" src="assets/icons/caselet-pending.svg"
+              class="caselet-status-icon">
+              <img *ngIf="caselet.status == 'Sent Back'" src="assets/icons/caselet-comment.svg"
+              class="caselet-status-icon">
+              <img *ngIf="caselet.status == 'Sent Back'" src="assets/icons/caselet-rejected.svg"
+              class="caselet-status-icon">
+            <span class="open-link" (click) = "caseletNavigate(caselet.caseletId, caselet.status)">
               OPEN
             </span>
-          <button (click) = "displayId($event)" type="button" data-toggle="collapse"  class="arrow-button collapsed" [attr.data-target]="'#caselet' + caselet.id" aria-expanded="false" aria-controls="collapseExample">
+            <button type="button" data-toggle="collapse" class="arrow-button collapsed"
+              [attr.data-target]="'#caselet' + caselet.id" aria-expanded="false" aria-controls="collapseExample">
               <i class="fa fa-chevron-up"></i></button>
-        </span>
-      </div>
-      <div class="collapse col-9" attr.id="caselet{{caselet.id}}">
+          </span>
+        </div>
+        <div class="collapse col-9" attr.id="caselet{{caselet.id}}">
           <div>
             <br />
-            <span>Submitted Date : {{caselet.submittedTime | date: 'dd/MM/yyyy'}} &nbsp;|&nbsp; Approved Date : {{caselet.approvedTime | date: 'dd/MM/yyyy'}} &nbsp; | &nbsp; Status : {{caselet.status}} &nbsp; | &nbsp; Admin Name: {{caselet.adminName}}</span>
+            <span *ngIf="caselet.status == 'Submitted'">Submitted Date : {{caselet.submittedTime | date: 'dd/MM/yyyy'}}
+              &nbsp;|&nbsp; Status : {{caselet.status}}</span>
+              <span *ngIf="caselet.status == 'Sent Back'">Submitted Date : {{caselet.submittedTime | date: 'dd/MM/yyyy'}}
+                  &nbsp;|&nbsp; Status : {{caselet.status}} &nbsp;|&nbsp; Admin Name : {{caselet.adminName}} <br />
+                  <b>Comments : </b><br />
+                  {{caselet.adminComment}}
+                </span>
+            <span *ngIf="caselet.status == 'Approved'">Submitted Date : {{caselet.submittedTime | date: 'dd/MM/yyyy'}}
+              &nbsp;|&nbsp; Approved Date :
+              {{caselet.approvedTime | date: 'dd/MM/yyyy'}} &nbsp; | &nbsp; Status : {{caselet.status}} &nbsp; |
+              &nbsp;
+              Admin Name: {{caselet.adminName}}</span>
             <br />
             <br />
           </div>
@@ -39,4 +80,4 @@
       <h3>There are no pending caselets.</h3>
     </div>
   </div>
-  </div>
+</div>

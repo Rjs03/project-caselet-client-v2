@@ -3,6 +3,7 @@ import { PreloaderService } from 'src/app/services/preloader.service';
 import { FilterService } from 'src/app/services/filter.service';
 import { DataServiceService } from 'src/app/services/data-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-caselet-filter',
@@ -13,6 +14,7 @@ export class CaseletFilterComponent implements OnInit {
   behavioralPackages: any;
   imageUrl: any;
   imageBlobUrl: any;
+  imageLoaded = false;
   filtersLoaded = false;
   showTechnology = false;
   showTools = false;
@@ -22,19 +24,20 @@ export class CaseletFilterComponent implements OnInit {
   subPractices: any;
   subVerticals: any;
   technologies: any;
+  technologyFilter = [];
+  toolFilter = [];
   tools: any;
   mid: any;
   name: any;
   jobTitle: any;
   practices: any;
   subPracticeSelected: any;
-  technologyFilter = {};
-  toolFilter = {};
 
   constructor(private preloaderService: PreloaderService,
     private filterService: FilterService,
     private dataService: DataServiceService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private commonService: CommonService) { }
 
   ngOnInit() {
     const user = this.preloaderService.getUserDetails();
@@ -61,11 +64,18 @@ export class CaseletFilterComponent implements OnInit {
       this.subPracticeSelected = response.data.filters.subPractices;
       this.offerings = response.data.filters.offerings;
       this.subVerticals = response.data.filters.subVerticals;
-      this.technologies = response.data.filters.technologies;
-      this.tools = response.data.filters.tools;
       this.filtersLoaded = true;
     }, (error) => {
       alert(error.error.status.message);
+    });
+
+    this.filterService.getTechnologies().subscribe((response: any) => {
+      this.technologies = response.data.technologies;
+      this.technologyFilter = this.technologies;
+    });
+
+    this.filterService.getTools().subscribe((response: any) => {
+      this.tools = response.data.tools;
     });
   }
 
@@ -92,6 +102,7 @@ export class CaseletFilterComponent implements OnInit {
     reader.addEventListener('load', () => {
       const base64data = reader.result;
       this.imageBlobUrl = this.sanitizer.bypassSecurityTrustUrl(base64data.toString());
+      this.imageLoaded = true;
     }, false);
     if (image) {
       reader.readAsDataURL(image);
@@ -110,4 +121,17 @@ export class CaseletFilterComponent implements OnInit {
     }
   }
 
+  technologyChange(value) {
+    if (value !== '') {
+      const techdata = [];
+      this.technologies.map((technology) => {
+        if ( technology.name.search(value) >= 0) {
+          techdata.push(technology);
+        }
+      });
+      this.technologyFilter = techdata;
+    } else {
+      this.technologyFilter = this.technologies;
+    }
+  }
 }

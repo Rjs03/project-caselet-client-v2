@@ -1,9 +1,9 @@
-<div class="container mt-3">
+<div class="container mt-3 pending-caselet">
   <a routerLink="/" style="text-decoration: none; font-size: 125%; color: #838383">
     < Back</a>&nbsp;&nbsp; <a routerLink="/" style="text-decoration: none; color: #747474">Home
   </a>&nbsp;>&nbsp;
   <a routerLink="/addCaselet" style="text-decoration: none; color: #747474">Add Caselet</a>
-  <form [formGroup]="storyForm" (ngSubmit)="onCaseletFormSubmit()">
+  <form [formGroup]="caseletForm">
     <br />
     <div *ngIf = "rejected && !admin">
       <p style = "color: red">{{rejectComment}}</p>
@@ -63,13 +63,14 @@
           <input formControlName="engineering" type="search" class="form-control" id="engineering"
             placeholder="Enter Engineering"><br />
         </div>
-        <div class="col-3 mb-3">
-          <h6>Account</h6>
-          <select class="custom-select" id="account" formControlName="account">
-              <option value="" disabled selected>Select your option</option>
-            <option *ngFor="let account of accounts" value={{account.name}}>{{account.name}}</option>
-          </select>
-        </div>
+        <div class="col-6 mb-3">
+            <h6>Account</h6>
+            <input [attr.list] = "caseletForm.get('account').value.length > 2 ? 'accounts' : null" formControlName="account" class="form-control" id="account"
+              placeholder="Enter Account" style = "width: 100%">
+              <datalist id="accounts">
+                <option *ngFor = "let account of accounts" [value] = "account.name">
+              </datalist>
+          </div>
         <div class="col-3 mb-3">
           <h6>Practice</h6>
           <select class="custom-select" id="practice" formControlName="practice">
@@ -216,43 +217,14 @@
       </quill-editor>
       <br />
       <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-      <button *ngIf="!admin" type = "button" class="float-right primary-button" (click)="reviewCaseletFunction()" data-toggle="modal" data-target="#reviewModal">Review & Submit</button>
-      <button *ngIf="admin" type="button" class="float-right primary-button" (click)="onApproveCaselet()">APPROVE</button>
-      <button *ngIf="admin" type="button" class="float-right btn btn-danger mr-3" data-toggle="modal" data-target="#myModal">SEND BACK</button>
+      <button type="button" class="float-right primary-button" (click)="onApproveCaselet()">APPROVE</button>
+      <button type="button" class="float-right btn btn-danger mr-3" data-toggle="modal" data-target="#myModal">SEND BACK</button>
       <br />
       <br />
     </div>
     <hr style="border-top: 2px solid #4e6976; color: #4e6976;">
-    <div *ngIf="!admin" class="mb-5">
-      <div class="float-right mb-5">
-        <button type="button" (click)="onSaveCaselet()" class="secondary-button mx-2">SAVE</button>
-        <!-- <button type="submit" class="primary-button">SUBMIT</button> -->
-      </div>
-    </div>
   </form>
 
-
-
-    <!-- TheReview Modal -->
-    <div class="modal" id="reviewModal">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Review Caselet</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <!-- Modal body -->
-          <div class="modal-body">
-            <!-- <app-review-caselet [caselet] = "reviewCaselet"></app-review-caselet> -->
-          </div>
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="primary-button" data-dismiss="modal" (click) = "onCaseletFormSubmit()">Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
   <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog">

@@ -31,8 +31,13 @@ export class CaseletService {
     return this.httpClient.post(environment.serverUrl + environment.image, imageData);
   }
 
-  getPendingCaselets() {
-    return this.httpClient.get(environment.serverUrl + environment.admin);
+  getPendingCaselets(options) {
+    const adminMidString = options.adminMid ? 'adminMid=' + options.adminMid + '&' : '';
+    const statusString = options.status ? 'status=' + options.status + '&' : '';
+    const fromDateString = options.fromDate ? 'fromDate=' + options.fromDate : '';
+    const queryString = adminMidString + statusString + fromDateString;
+    const finalString = queryString.length > 0 ? '?' + queryString : queryString;
+    return this.httpClient.get(environment.serverUrl + environment.admin  + finalString);
   }
 
   getPendingCaselet(caseletId) {
@@ -60,7 +65,6 @@ export class CaseletService {
   }
 
   shareCaselet (shareCaseletData, id) {
-    console.log('Service', shareCaseletData);
     return this.httpClient.put(environment.serverUrl + environment.caselet + environment.share + id, shareCaseletData);
   }
 }

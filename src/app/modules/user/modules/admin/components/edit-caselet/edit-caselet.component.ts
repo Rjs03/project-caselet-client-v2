@@ -6,6 +6,7 @@ import { PreloaderService } from 'src/app/services/preloader.service';
 import { CaseletService } from 'src/app/services/caselet.service';
 import Quill from 'quill';
 import ImageResize from 'quill-image-resize-module';
+import { DataServiceService } from 'src/app/services/data-service.service';
 
 const Block = Quill.import('blots/block');
 Block.tagName = 'DIV';
@@ -37,7 +38,7 @@ export class EditCaseletComponent implements OnInit {
   tags = [];
   someTechnologies = ['JAVA', '.NET', 'ANGULAR'];
   tools = [];
-  storyForm: FormGroup;
+  caseletForm: FormGroup;
   stepCount = 1;
   modules = {};
   savedCaselet: {};
@@ -74,7 +75,7 @@ export class EditCaseletComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private filterService: FilterService,
-    private userService: PreloaderService,
+    private dataService: DataServiceService,
     private caseletSerivce: CaseletService) {
     this.modules = this.config;
   }
@@ -99,7 +100,6 @@ export class EditCaseletComponent implements OnInit {
     this.caseletSerivce.getPendingCaselet(caseletId).subscribe((response: any) => {
       this.storyAdded = response.data.project;
       this.mid = response.data.project.userMid;
-      this.author = response.data.project.user.name;
       this.patchingValueToForm(this.storyAdded);
     });
   }
@@ -127,18 +127,17 @@ export class EditCaseletComponent implements OnInit {
   }
 
   getFields() {
-    this.filterService.getfilters().subscribe((response: any) => {
-      this.accounts = response.data.filters.accounts;
-      this.contracts = response.data.filters.contracts;
-      this.industries = response.data.filters.subVerticals;
-      this.offerings = response.data.filters.offerings;
-      this.practice = response.data.filters.practice;
-      this.services = response.data.filters.subPractices;
-      this.tags = response.data.filters.tag;
-      this.technologies = response.data.filters.technologies;
-      this.tools = response.data.filters.tools;
-      this.verticals = response.data.filters.verticals;
-      console.log(response);
+    this.filterService.getMetaData().subscribe((response: any) => {
+      this.accounts = response.data.metadata.accounts;
+      this.contracts = response.data.metadata.contracts;
+      this.industries = response.data.metadata.subVerticals;
+      this.offerings = response.data.metadata.offerings;
+      this.practice = response.data.metadata.practice;
+      this.services = response.data.metadata.subPractices;
+      this.tags = response.data.metadata.tag;
+      this.technologies = response.data.metadata.technologies;
+      this.tools = response.data.metadata.tools;
+      this.verticals = response.data.metadata.verticals;
     });
   }
 
@@ -176,7 +175,7 @@ export class EditCaseletComponent implements OnInit {
     }
 
 
-    this.storyForm.patchValue({
+    this.caseletForm.patchValue({
       title: formData.title,
       description: formData.storyDescription,
       experts: formData.experts,
@@ -204,22 +203,17 @@ export class EditCaseletComponent implements OnInit {
 
   convertCaseletFormToJSON() {
     let mid = '';
-    let name = '';
 
-    console.log(this.admin);
-    if (this.admin) {
-      mid = this.mid;
-      name = this.author;
-    }
+    mid = this.mid;
 
-    const tags = this.storyForm.get('tags').value ? this.storyForm.get('tags').value : [];
+    const tags = this.caseletForm.get('tags').value ? this.caseletForm.get('tags').value : [];
     const newTagsSet = new Set();
     tags.map(tag => {
       newTagsSet.add(tag.toLowerCase());
     });
     const newTags = Array.from(newTagsSet);
 
-    const technologies = this.storyForm.get('technologies').value ? this.storyForm.get('technologies').value : [];
+    const technologies = this.caseletForm.get('technologies').value ? this.caseletForm.get('technologies').value : [];
 
     const newTechnologiesSet = new Set();
     technologies.map(technology => {
@@ -227,8 +221,7 @@ export class EditCaseletComponent implements OnInit {
     });
     const newTechnologies = Array.from(newTechnologiesSet);
 
-    console.log(newTechnologies);
-    const tools = this.storyForm.get('tools').value ? this.storyForm.get('tools').value : [];
+    const tools = this.caseletForm.get('tools').value ? this.caseletForm.get('tools').value : [];
     const newToolsSet = new Set();
     tools.map(tool => {
       newToolsSet.add(tool.display.toLowerCase());
@@ -238,45 +231,42 @@ export class EditCaseletComponent implements OnInit {
     const experts = [];
 
     const story = {
-      account: this.storyForm.get('account').value,
-      title: this.storyForm.get('title').value,
+      account: this.caseletForm.get('account').value,
+      title: this.caseletForm.get('title').value,
       coverImage: this.coverImage,
-      vertical: this.storyForm.get('vertical').value,
-      domain: this.storyForm.get('domain').value,
+      vertical: this.caseletForm.get('vertical').value,
+      domain: this.caseletForm.get('domain').value,
       expertsOfTopic: experts,
-      engineering: this.storyForm.get('engineering').value,
+      engineering: this.caseletForm.get('engineering').value,
       tags: newTags,
       technologies: newTechnologies,
       tools: newTools,
-      offering: this.storyForm.get('offering').value,
-      subVertical: this.storyForm.get('industry').value,
-      subPractice: this.storyForm.get('service').value,
-      practice: this.storyForm.get('practice').value,
-      contract: this.storyForm.get('contract').value,
-      user: {
-        mid: mid,
-        name: name
-      },
+      offering: this.caseletForm.get('offering').value,
+      subVertical: this.caseletForm.get('industry').value,
+      subPractice: this.caseletForm.get('service').value,
+      practice: this.caseletForm.get('practice').value,
+      contract: this.caseletForm.get('contract').value,
+      userMid: mid,
       customer: {
-        name: this.storyForm.get('customerName').value,
-        details: this.storyForm.get('customerDetails').value
+        name: this.caseletForm.get('customerName').value,
+        details: this.caseletForm.get('customerDetails').value
       },
-      projectDetails: this.storyForm.get('projectDetails').value,
-      benefits: this.storyForm.get('customerAndMindtreeBenefits').value,
-      challenges: this.storyForm.get('needChallenges').value,
-      solution: this.storyForm.get('solutionProvided').value,
-      executionSummary: this.storyForm.get('executiveSummaryOfTheCaselet').value
+      userDetails: {
+        name: '',
+        email: ''
+      },
+      editedFields: [],
+      projectDetails: this.caseletForm.get('projectDetails').value,
+      benefits: this.caseletForm.get('customerAndMindtreeBenefits').value,
+      challenges: this.caseletForm.get('needChallenges').value,
+      solution: this.caseletForm.get('solutionProvided').value,
+      executionSummary: this.caseletForm.get('executiveSummaryOfTheCaselet').value
     };
-    console.log(story);
     return story;
   }
 
-  reviewCaseletFunction() {
-    this.reviewCaselet = this.convertCaseletFormToJSON();
-  }
-
   buildCaseletForm() {
-    this.storyForm = this.formBuilder.group({
+    this.caseletForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
       experts: [''],
@@ -302,41 +292,18 @@ export class EditCaseletComponent implements OnInit {
     });
   }
 
-  onSaveCaselet() {
-    console.log(this.customerDetails);
-    const story = this.convertCaseletFormToJSON();
-    const confirmation = confirm('Do you want to save caselet ? ');
-    if (confirmation) {
-      this.caseletSerivce.saveCaselet(story).subscribe((response) => {
-        alert('Caselet Saved!');
-      });
-    } else {
-      console.log(false);
-    }
-  }
-
-  onCaseletFormSubmit() {
-    const story = this.convertCaseletFormToJSON();
-    story['submit'] = true;
-    console.log('This confirmation');
-    const confirmation = confirm('Do you want to submit caselet ? ');
-    if (confirmation) {
-      this.caseletSerivce.saveCaselet(story).subscribe((response) => {
-        alert('Caselet submitted!');
-        this.router.navigate(['/']);
-      });
-    } else {
-      console.log(false);
-    }
-  }
-
   onApproveCaselet() {
     const story = this.convertCaseletFormToJSON();
     const confirmation = confirm('Do you want to approve caselet ? ');
     if (confirmation) {
-      this.caseletSerivce.approveCaselet(story).subscribe((response) => {
+      this.dataService.getUserData(this.mid).subscribe((response) => {
+        story.userDetails.name = response.value[0].displayName;
+        story.userDetails.email = response.value[0].mail;
+        console.log(response);
+      this.caseletSerivce.approveCaselet(story).subscribe((responseApprove) => {
         alert('Caselet Approved!');
         this.router.navigate(['/']);
+      });
       });
     } else {
       console.log(false);
@@ -352,13 +319,21 @@ export class EditCaseletComponent implements OnInit {
   }
 
   onRejectCaselet() {
-    const message = {
-      message: this.rejectComment
+    const payload = {
+      message: this.rejectComment,
+      userDetails: {
+        name: '',
+        email: ''
+      }
     };
     const id = this.storyAdded.id;
-    this.caseletSerivce.rejectCaselet(message, id).subscribe((response) => {
-      alert('Caselet rejected!');
-      this.router.navigate(['user/admin/pendingCaselets']);
+    this.dataService.getUserData(this.mid).subscribe((response) => {
+      payload.userDetails.name = response.value[0].displayName;
+      payload.userDetails.email = response.value[0].mail;
+      this.caseletSerivce.rejectCaselet(payload, id).subscribe((responseRejected: any) => {
+        alert('Caselet rejected!');
+        this.router.navigate(['user/admin/pendingCaselets']);
+      });
     });
   }
 

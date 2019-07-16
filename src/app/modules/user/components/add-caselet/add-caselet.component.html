@@ -69,7 +69,7 @@
           <tag-input [modelAsStrings]=true formControlName="technologies" [theme]="'ngxtag-theme'"
             secondaryPlaceholder="Enter technology" placeholder="+Technology" [onlyFromAutocomplete]="false"
             class="tagInput">
-            <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="someTechnologies">
+            <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="technologies">
             </tag-input-dropdown>
           </tag-input><br />
         </div>
@@ -84,7 +84,10 @@
             </h6>
           </label>
           <tag-input [modelAsStrings]=true formControlName="tools" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter tool"
-            placeholder="+Tool" class="tagInput"></tag-input><br />
+            placeholder="+Tool" class="tagInput" [onlyFromAutocomplete]="false">
+            <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="tools">
+            </tag-input-dropdown>
+          </tag-input><br />
         </div>
         <div class="col-6 mb-3">
           <h6>Domain</h6>
@@ -246,7 +249,7 @@
           customer find from this whole exercise? What did Mindtree gain out of this engagement – what was our learning,
           our benefits)</span>
       </h4>
-      <hr class="toolTipInfo">
+      <hr class="step-separator">
       <quill-editor #customerAndMindtreeBenefits [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="customerAndMindtreeBenefits" (onEditorCreated)="getEditorInstance($event)">
       </quill-editor>

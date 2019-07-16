@@ -24,12 +24,16 @@ export class DataServiceService {
     // "or+startswith(userPrincipalName,'" + value + "'))&$top=4";
     const filter =
       'startswith(displayName,' +
+      // tslint:disable-next-line:quotemark
       "'" +
       value +
+      // tslint:disable-next-line:quotemark
       "'" +
       ')or startswith(userPrincipalName,' +
+      // tslint:disable-next-line:quotemark
       "'" +
       value +
+      // tslint:disable-next-line:quotemark
       "'" +
       ')&$top=4';
     const Url = this.graphUrl + '?api-version=1.6&$filter=' + filter;
@@ -44,8 +48,10 @@ export class DataServiceService {
     });
     const filter =
     'startswith(userPrincipalName,' +
+    // tslint:disable-next-line:quotemark
     "'" +
     value +
+    // tslint:disable-next-line:quotemark
     "'" +
     ')&$top=1';
     const Url =

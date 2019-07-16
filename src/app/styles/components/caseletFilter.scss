@@ -1,18 +1,24 @@
-.caseletFilter {
-  .userInfo {
+.caselet-filter {
+  .user-info {
     display: inline-block;
-    height: 6rem;
-    .userDetails {
+    // height: 6rem;
+    .user-details {
       vertical-align: middle;
-      .userImage {
+      .user-image {
         float:left;
-        width: 4rem;
+        width: 30%;
         border-radius: 50%;
         border: solid 2px white;
+        margin-right: 0.5rem;
       }
-      .userName {
-        font-size: 80%;
+      .user-name {
         overflow-wrap: break-word;
+        font-size: 90%;
+      }
+
+      .user-job-title {
+        overflow-wrap: break-word;
+        font-size: 70%
       }
     }
   }

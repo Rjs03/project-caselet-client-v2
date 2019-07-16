@@ -37,7 +37,6 @@ export class AddCaseletComponent implements OnInit {
   expNam = [];
   subPractices = [];
   expertsName = new Set();
-  someTechnologies = ['JAVA', '.NET', 'ANGULAR'];
   tools = [];
   caseletForm: FormGroup;
   stepCount = 1;
@@ -140,7 +139,6 @@ export class AddCaseletComponent implements OnInit {
       file = fileInput.files[0];
       this.caseletSerivce.saveImage(file).subscribe((response: any) => {
         const imageUrlFromServer = response.data.imageUrl;
-        console.log(response);
         const range = this.quillEditorRef.getSelection(true);
         const img = '<img src=' + imageUrlFromServer + ' />';
         this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
@@ -154,38 +152,43 @@ export class AddCaseletComponent implements OnInit {
     const user = this.userService.getUserDetails();
     const mid = user.mid;
     this.caseletSerivce.getCaseletByAuthor(mid).subscribe((response: any) => {
-      // tslint:disable-next-line:triple-equals
-      if (response.data.project.submit == true) {
-        alert('You have already submitted one caselet. Please wait till the admin approves it.');
-        this.router.navigate(['/']);
-      } else {
-        this.savedCaselet = response.data.project;
-        this.rejectComment = response.data.project.adminComment;
-        if (this.rejectComment != null) {
-          this.rejected = true;
-          console.log('Success');
-        }
-        if (this.savedCaselet) {
-          this.patchingValueToForm(this.savedCaselet);
+      if (response.data.project !== null) {
+        if ((response.data.project.submit === undefined) || (response.data.project.submit === false)) {
+          this.savedCaselet = response.data.project;
+          this.rejectComment = response.data.project.adminComment;
+          if (this.rejectComment != null) {
+            this.rejected = true;
+          }
+          if (this.savedCaselet) {
+            this.patchingValueToForm(this.savedCaselet);
+          }
+        } else if (response.data.project.submit === true) {
+          alert('You have already submitted one caselet. Please wait till the admin approves it.');
+          this.router.navigate(['/']);
         }
       }
     });
   }
 
   getFields() {
-    this.filterService.getfilters().subscribe((response: any) => {
-      this.accounts = response.data.filters.accounts.map((account) => {
+    this.filterService.getMetaData().subscribe((response: any) => {
+      console.log('Meta data', response);
+      this.accounts = response.data.metadata.accounts.map((account) => {
         return account.name;
       });
-      this.contracts = response.data.filters.contracts;
-      this.industries = response.data.filters.subVerticals;
-      this.offerings = response.data.filters.offerings;
-      this.practice = response.data.filters.practice;
-      this.services = response.data.filters.subPractices;
-      this.tags = response.data.filters.tag;
-      this.technologies = response.data.filters.technologies;
-      this.tools = response.data.filters.tools;
-      this.verticals = response.data.filters.verticals;
+      this.contracts = response.data.metadata.contracts;
+      this.industries = response.data.metadata.subVerticals;
+      this.offerings = response.data.metadata.offerings;
+      this.practice = response.data.metadata.practice;
+      this.services = response.data.metadata.subPractices;
+      this.tags = response.data.metadata.tag;
+      this.technologies = response.data.metadata.technologies.map((technology) => {
+        return technology.name;
+      });
+      this.tools = response.data.metadata.tools.map((tool) => {
+        return tool.name;
+      });
+      this.verticals = response.data.metadata.verticals;
     });
   }
 
@@ -193,7 +196,6 @@ export class AddCaseletComponent implements OnInit {
     const technologies = [];
     const tools = [];
     const tags = [];
-    console.log(formData);
 
     // tslint:disable-next-line:triple-equals
     if (formData.technologies != '') {
@@ -209,12 +211,14 @@ export class AddCaseletComponent implements OnInit {
       });
     }
 
-        // tslint:disable-next-line:triple-equals
-        if (formData.tags != '') {
-          formData.tags.split(',').map(tag => {
-            tags.push(tag);
-          });
-        }
+    // tslint:disable-next-line:triple-equals
+    if (formData.tags != '') {
+      formData.tags.split(',').map(tag => {
+        tags.push(tag);
+      });
+    }
+
+    this.onPracticeSelect(formData.practice);
 
     this.caseletForm.patchValue({
       title: formData.title,
@@ -245,7 +249,7 @@ export class AddCaseletComponent implements OnInit {
   convertCaseletFormToJSON() {
     const mid = '';
     const name = '';
-   const tags = this.caseletForm.get('tags').value ? this.caseletForm.get('tags').value : [];
+    const tags = this.caseletForm.get('tags').value ? this.caseletForm.get('tags').value : [];
     const newTagsSet = new Set();
     tags.map(tag => {
       newTagsSet.add(tag.toLowerCase());
@@ -259,7 +263,6 @@ export class AddCaseletComponent implements OnInit {
     });
     const newTechnologies = Array.from(newTechnologiesSet);
 
-    console.log(newTechnologies);
     const tools = this.caseletForm.get('tools').value ? this.caseletForm.get('tools').value : [];
     const newToolsSet = new Set();
     tools.map(tool => {
@@ -299,7 +302,6 @@ export class AddCaseletComponent implements OnInit {
       solution: this.caseletForm.get('solutionProvided').value,
       executionSummary: this.caseletForm.get('executiveSummaryOfTheCaselet').value
     };
-    console.log(story);
     return story;
   }
 
@@ -336,7 +338,6 @@ export class AddCaseletComponent implements OnInit {
 
   onSaveCaselet() {
     const story = this.convertCaseletFormToJSON();
-    console.log(story.customer.details);
     const confirmation = confirm('Do you want to save caselet ? ');
     if (confirmation) {
       this.caseletSerivce.saveCaselet(story).subscribe((response) => {
@@ -348,15 +349,12 @@ export class AddCaseletComponent implements OnInit {
   onCaseletFormSubmit() {
     const story = this.convertCaseletFormToJSON();
     story['submit'] = true;
-    console.log('This confirmation');
     const confirmation = confirm('Do you want to submit caselet ? ');
     if (confirmation) {
       this.caseletSerivce.saveCaselet(story).subscribe((response) => {
         alert('Caselet submitted!');
         this.router.navigate(['/']);
       });
-    } else {
-      console.log(false);
     }
   }
 

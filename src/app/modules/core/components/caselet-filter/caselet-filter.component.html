@@ -1,19 +1,19 @@
-<div class="sidenavcomp">
+<div class="sidenavcomp caselet-filter">
   <div class="sidenav">
     <div class="sidenav-content" *ngIf="filtersLoaded">
       <div>
-        <div style="display: inline-block">
-          <div class="h6" style="vertical-align: middle;">
-            <img style="float:left; width: 30%; border-radius: 50%; border: solid 2px white; margin-right: 0.5rem" [src]="imageBlobUrl">
-            <span style="overflow-wrap: break-word; font-size: 90%;">{{name}}</span><br />
-            <span style="overflow-wrap: break-word; font-size: 70%">({{jobTitle}})</span>
+        <div class = "user-info">
+          <div class="h6" class = "user-details">
+            <img *ngIf = "imageLoaded" class = "user-image" [src]="imageBlobUrl">
+            <span class = "user-name">{{name}}</span><br />
+            <span class = "user-job-title">({{jobTitle}})</span>
           </div>
         </div>
         <hr>
         <div>
           <h6>Vertical</h6>
           <div class="select">
-            <select name="slct" id="slct">
+            <select (change) = "verticalChange($event.target.value)" name="slct" id="slct">
               <option selected disabled value = "">Select Option</option>
               <option value={{vertical.name}} *ngFor="let vertical of verticals">
                 {{vertical.name}}
@@ -86,6 +86,7 @@
     </div>
   </div>
 
+  <!-- technology modal -->
   <div class="modal popup" id="technologyModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -98,9 +99,10 @@
         </div>
         <!-- Modal body -->
         <div class="modal-body">
+          <!-- <input (change) = "technologyChange($event.target.value)" type = "search" /> -->
           <div class = "row">
-            <div *ngFor="let technology of technologies" class = "col-md-6 col-lg-4 ">
-                <label class="checkbox-container">{{technology.name}}
+            <div *ngFor="let technology of technologyFilter" class = "col-md-6 col-lg-4 ">
+                <label class="checkbox-container"><span class = "filter-name">{{technology.name}}</span>
                   <input type="checkbox">
                   <span class="checkmark"></span>
                 </label>
@@ -115,6 +117,7 @@
     </div>
   </div>
 
+  <!-- tool modal -->
   <div class="modal popup" id="toolModal">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -129,7 +132,7 @@
           <div class="modal-body">
             <div class = "row">
               <div *ngFor="let tool of tools" class = "col-md-6 col-lg-4 ">
-                  <label class="checkbox-container">{{tool.name}}
+                  <label class="checkbox-container"><span class = "filter-name">{{tool.name}}</span>
                     <input type="checkbox">
                     <span class="checkmark"></span>
                   </label>
