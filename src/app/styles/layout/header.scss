@@ -92,5 +92,13 @@
     height: 7vh;
   }
 
+  .logo-text {
+    color: white;
+    display: inline-block;
+    &:focus {
+      outline: none;
+    }
+  }
+
   .dropdown-toggle:after { content: none }
 }

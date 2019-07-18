@@ -3,9 +3,13 @@
 $ngxtag-primary: $primaryColor;
 $ngxtag-primary-dark: darken($ngxtag-primary, 10%);
 
+$ngx-tagerror: #dc3545;
+
 // this is the container's theme
 $ngxtag-theme: (
-    container-border-bottom-focused: 1px solid $ngxtag-primary
+    container-border-bottom-focused: 1px solid $ngxtag-primary,
+    container-border-bottom-invalid: 1px solid $ngx-tagerror,
+    container-padding: 0rem
 );
 
 // this is the tag's theme
@@ -40,3 +44,4 @@ tag-input .ng2-tag-input.ngxtag-theme tag {
 tag-input .ng2-tag-input.ngxtag-theme tag delete-icon {
     @include icon-theme($ngxtag-icon-theme);
 }
+

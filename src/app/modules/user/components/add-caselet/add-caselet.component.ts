@@ -19,9 +19,10 @@ Quill.register('modules/imageResize', ImageResize);
 })
 export class AddCaseletComponent implements OnInit {
 
+  validators = Validators.required;
   rejectComment;
   rejected = false;
-  imageUploaded = false;
+  someValidator = true;
   storyAdded;
   coverImage = '';
   technologies = [];
@@ -222,7 +223,6 @@ export class AddCaseletComponent implements OnInit {
 
     this.caseletForm.patchValue({
       title: formData.title,
-      description: formData.storyDescription,
       experts: formData.experts,
       technologies: technologies,
       tools: tools,
@@ -311,28 +311,27 @@ export class AddCaseletComponent implements OnInit {
 
   buildCaseletForm() {
     this.caseletForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      experts: [''],
-      technologies: [''],
+      title: ['', [Validators.required, Validators.maxLength(80)]],
+      experts: ['', [Validators.required]],
+      technologies: ['', [Validators.required]],
       tools: [''],
-      tags: [''],
+      tags: ['', [Validators.required]],
       account: [''],
       vertical: [''],
-      domain: [''],
+      domain: ['', [Validators.required]],
       offering: [''],
       engineering: [''],
       practice: [''],
       contract: [''],
       industry: [''],
       service: [''],
-      customerName: [''],
-      customerDetails: [''],
-      projectDetails: [''],
-      needChallenges: [''],
-      solutionProvided: [''],
-      customerAndMindtreeBenefits: [''],
-      executiveSummaryOfTheCaselet: ['']
+      customerName: ['', [Validators.required]],
+      customerDetails: ['', Validators.required],
+      projectDetails: ['', Validators.required],
+      needChallenges: ['', Validators.required],
+      solutionProvided: ['', Validators.required],
+      customerAndMindtreeBenefits: ['', Validators.required],
+      executiveSummaryOfTheCaselet: ['', Validators.required]
     });
   }
 
@@ -364,5 +363,10 @@ export class AddCaseletComponent implements OnInit {
 
   decrementStep() {
     this.stepCount--;
+  }
+
+  quillValidator(quillFormControl) {
+    console.log(quillFormControl);
+    return true;
   }
 }

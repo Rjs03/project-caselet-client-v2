@@ -10,7 +10,6 @@ export class AdminService {
   constructor(private httpClient: HttpClient) { }
 
   getAdminNames(options) {
-
     return this.httpClient.get(environment.serverUrl + environment.admin + environment.list);
   }
 }

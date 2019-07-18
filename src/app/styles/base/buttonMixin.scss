@@ -18,4 +18,8 @@
     &:focus {
       outline: none;
     }
+    &:disabled {
+      background-color: lighten($primaryColor, 20);
+      cursor: not-allowed;
+    }
   }

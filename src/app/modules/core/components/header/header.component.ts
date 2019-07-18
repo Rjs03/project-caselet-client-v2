@@ -5,6 +5,7 @@ import { PreloaderService } from 'src/app/services/preloader.service';
 import { SearchService } from 'src/app/services/search.service';
 import { CommonService } from 'src/app/services/common.service';
 import { DataServiceService } from 'src/app/services/data-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,6 @@ export class HeaderComponent implements OnInit {
   searchValue = '';
   role = '';
   imageUrl: any;
-  router: string;
   imageFetched = false;
   user: any;
 
@@ -24,7 +24,8 @@ export class HeaderComponent implements OnInit {
     private searchService: SearchService,
     private commonService: CommonService,
     private dataService: DataServiceService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private router: Router) { }
 
   ngOnInit() {
     this.checkLogin();
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
     this.getThumbnail();
   }
 
-  searchData() {
+   searchData() {
     this.searchService.search(this.searchValue, 1, 5).subscribe((response: any) => {
       const caseletData = {
         searchValue: this.searchValue,

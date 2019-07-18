@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { DownloadService } from 'src/app/services/download.service';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -8,26 +8,28 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class CaseletDownloadComponent implements OnInit {
 
+  @Input() caselet;
+
   @ViewChild('content') content: ElementRef;
 
   dataFetched = false;
-  caselet: any;
+  // caselet: any;
 
   constructor(private commonService: CommonService,
     private downloadService: DownloadService
     ) {}
 
   ngOnInit() {
-    this.downloadCaseletData();
+    // this.downloadCaseletData();
   }
 
-  downloadCaseletData() {
-    this.commonService.getDownloadCaseletSubject().subscribe((response: any) => {
-      this.dataFetched = response.dataFetched;
-      this.caselet = response.caselet;
-      if (this.caselet !== undefined) {
-        this.downloadService.downloadPDF(this.content, response.caselet.title);
-      }
-    });
-  }
+  // downloadCaseletData() {
+  //   this.commonService.getDownloadCaseletSubject().subscribe((response: any) => {
+  //     this.dataFetched = response.dataFetched;
+  //     this.caselet = response.caselet;
+  //     if (this.caselet !== undefined) {
+  //       this.downloadService.downloadPDF(this.content, response.caselet.title);
+  //     }
+  //   });
+  // }
 }

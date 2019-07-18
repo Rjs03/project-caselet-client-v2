@@ -5,19 +5,25 @@
   <a routerLink="/addCaselet" class="link">Add Caselet</a>
   <form [formGroup]="caseletForm" (ngSubmit)="onCaseletFormSubmit()">
     <br />
-    <div *ngIf="rejected">
-      <p class="rejectComment">{{rejectComment}}</p>
-    </div>
     <div *ngIf="stepCount == 1">
       <h4 class="stepHeader">Basic Information</h4>
       <hr class="step-separator">
       <label for="title">
-        <h6>Title of the caselet</h6>
+        <h6>Title of the caselet *</h6>
       </label>
-      <input formControlName="title" type="search" class="form-control" id="title" placeholder="Enter title"><br />
+      <input formControlName="title" type="search" class="form-control" id="title" placeholder="Enter title"
+        [ngClass]="{'is-invalid': (caseletForm.get('title').touched || caseletForm.get('title').dirty) && !caseletForm.get('title').valid}">
+      <div class="invalid-feedback">
+        <span *ngIf="caseletForm.get('title').errors?.required">
+          Please enter a Title
+        </span>
+        <span *ngIf = "caseletForm.get('title').errors?.maxlength">
+          Title cannot be more than 80 characters
+        </span>
+      </div><br />
       <label for="experts">
         <h6 class="customizedToolTip">
-          Experts of the topic&nbsp;
+          Experts of the topic *&nbsp;
           <i class="fa fa-info-circle"></i>
           <span class="toolTipInfoSmall">
             <p> Please press enter after adding expert</p>
@@ -25,14 +31,20 @@
         </h6>
       </label>
       <tag-input (onTextChange)="expertsFunctionCall($event)" formControlName="experts" [theme]="'ngxtag-theme'"
-        secondaryPlaceholder="Enter Experts" placeholder="+Expert" class="tagInput" [onlyFromAutocomplete]="false">
+        secondaryPlaceholder="Enter Experts" placeholder="+Expert" class="tagInput" [onlyFromAutocomplete]="true">
         <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="expNam" [identifyBy]="'mid'"
           [displayBy]="'name'">
         </tag-input-dropdown>
-      </tag-input><br />
+      </tag-input>
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('experts').touched || caseletForm.get('experts').dirty)) && !caseletForm.get('experts').valid">
+        <span>
+          Please enter at least one expert.
+        </span>
+      </div><br />
       <label for="tags">
         <h6 class="customizedToolTip">
-          Tags&nbsp;
+          Tags *&nbsp;
           <i class="fa fa-info-circle"></i>
           <span class="toolTipInfoSmall">
             <p> Please press enter after adding a new tag</p>
@@ -40,26 +52,30 @@
         </h6>
       </label>
       <tag-input [modelAsStrings]=true formControlName="tags" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter tag"
-        placeholder="+Tag" class="tagInput"></tag-input><br />
-      <br />
-      <div *ngIf="imageUploaded == true">
-        <h1>Image Uploaded</h1>
-        <img src={{coverImageUrl}} class="covrImage" />
+        placeholder="+Tag" class="tagInput">
+      </tag-input>
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('tags').touched || caseletForm.get('tags').dirty)) && !caseletForm.get('tags').valid">
+        <span>
+          Please enter at least one tag.
+        </span>
+      </div><br />
+      <div class = "d-flex justify-content-between">
+        <div style = "margin-left: 6rem;"></div>
+        <div>Step 1 out of 8</div>
+        <div>
+        <button class="primary-button" (click)="incrementStep()">Next</button>
       </div>
-      <div>
-        <button class="float-right primary-button" (click)="incrementStep()">Next</button>
-        <br />
-        <br />
       </div>
     </div>
     <div *ngIf="stepCount == 2">
       <h4 class="stepHeader">Meta Data</h4>
       <hr class="step-separator">
       <div class="row">
-        <div class="col-6">
+        <div class="col-6 mb-3">
           <label for="technologies">
             <h6 class="customizedToolTip">
-              Technology&nbsp;
+              Technologies *&nbsp;
               <i class="fa fa-info-circle"></i>
               <span class="toolTipInfoSmall">
                 <p> Please press enter after adding a new technology</p>
@@ -71,11 +87,16 @@
             class="tagInput">
             <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="technologies">
             </tag-input-dropdown>
-          </tag-input><br />
+          </tag-input>      <div class="invalid-form-data"
+          *ngIf="((caseletForm.get('technologies').touched || caseletForm.get('technologies').dirty)) && !caseletForm.get('technologies').valid">
+          <span>
+            Please enter at least one technology.
+          </span>
         </div>
-        <div class="col-6">
+        </div>
+        <div class="col-6 mb-3">
           <label for="tools">
-            <h6 class="customizedToolTip">Tools
+            <h6 class="customizedToolTip">
               Tools&nbsp;
               <i class="fa fa-info-circle"></i>
               <span class="toolTipInfoSmall">
@@ -83,29 +104,34 @@
               </span>
             </h6>
           </label>
-          <tag-input [modelAsStrings]=true formControlName="tools" [theme]="'ngxtag-theme'" secondaryPlaceholder="Enter tool"
-            placeholder="+Tool" class="tagInput" [onlyFromAutocomplete]="false">
+          <tag-input [modelAsStrings]=true formControlName="tools" [theme]="'ngxtag-theme'"
+            secondaryPlaceholder="Enter tool" placeholder="+Tool" class="tagInput" [onlyFromAutocomplete]="false">
             <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="tools">
             </tag-input-dropdown>
-          </tag-input><br />
+          </tag-input>
         </div>
         <div class="col-6 mb-3">
-          <h6>Domain</h6>
-          <input formControlName="domain" type="search" class="form-control" id="domain"
-            placeholder="Enter Domain"><br />
+          <h6>Domain *</h6>
+          <input formControlName="domain" type="search" class="form-control" id="domain" placeholder="Enter Domain"
+            [ngClass]="{'is-invalid': (caseletForm.get('domain').touched || caseletForm.get('domain').dirty) && !caseletForm.get('domain').valid}">
+          <div class="invalid-feedback">
+            <span *ngIf="caseletForm.get('domain').errors?.required">
+              Please enter a Domain
+            </span>
+          </div>
         </div>
         <div class="col-6 mb-3">
           <h6>Engineering</h6>
           <input formControlName="engineering" type="search" class="form-control" id="engineering"
-            placeholder="Enter Engineering"><br />
+            placeholder="Enter Engineering">
         </div>
         <div class="col-6 mb-3">
           <h6>Account</h6>
-          <input [attr.list] = "caseletForm.get('account').value.length > 2 ? 'accounts' : null" formControlName="account" class="form-control" id="account"
-            placeholder="Enter Account" style = "width: 100%">
-            <datalist id="accounts">
-              <option *ngFor = "let account of accounts" [value] = "account">
-            </datalist>
+          <input [attr.list]="caseletForm.get('account').value.length > 2 ? 'accounts' : null" formControlName="account"
+            class="form-control" id="account" placeholder="Enter Account" style="width: 100%">
+          <datalist id="accounts">
+            <option *ngFor="let account of accounts" [value]="account">
+          </datalist>
         </div>
         <div class="col-3 mb-3">
           <h6>Practice</h6>
@@ -151,11 +177,14 @@
           </select>
         </div>
       </div>
-      <div>
-        <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-        <button class="float-right primary-button" (click)="incrementStep()">Next</button>
-        <br />
-        <br />
+      <div class = "d-flex justify-content-between">
+          <div>
+              <button class="primary-button" (click)="decrementStep()">Previous</button>
+          </div>
+          <div>Step 2 out of 8</div>
+          <div>
+          <button class="primary-button" (click)="incrementStep()">Next</button>
+        </div>
       </div>
     </div>
     <div *ngIf="stepCount == 3">
@@ -171,39 +200,68 @@
       </h4>
       <hr class="step-separator">
       <label for="customerName">
-        <h6>Customer Name</h6>
+        <h6>Customer Name *</h6>
       </label>
       <input type="search" class="form-control" id="customerName" placeholder="Enter Customer Name"
-        formControlName="customerName"><br />
-      <h6>Description</h6>
+        formControlName="customerName"
+        [ngClass]="{'is-invalid': (caseletForm.get('customerName').touched || caseletForm.get('customerName').dirty) && !caseletForm.get('customerName').valid}">
+      <div class="invalid-feedback">
+        <span *ngIf="caseletForm.get('domain').errors?.required">
+          Please enter customer name.
+        </span>
+      </div><br />
+      <h6>Description *</h6>
       <quill-editor #customerDetails [theme]="snow" [styles]=editorStyle [modules]="modules"
-        formControlName="customerDetails" (onEditorCreated)="getEditorInstance($event)">
+        formControlName="customerDetails" (onEditorCreated)="getEditorInstance($event)"
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('customerDetails').touched || caseletForm.get('customerDetails').dirty)) && ((caseletForm.get('customerDetails').value.length == 0) || (caseletForm.get('customerDetails').value == '<div><br></div>'))}">
       </quill-editor>
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('customerDetails').touched || caseletForm.get('customerDetails').dirty)) && ((caseletForm.get('customerDetails').value.length == 0) || (caseletForm.get('customerDetails').value == '<div><br></div>'))">
+        <span>
+          Please enter customer details.
+        </span>
+      </div>
       <br />
-      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
-      <br />
-      <br />
+      <div class = "d-flex justify-content-between">
+          <div>
+              <button class="primary-button" (click)="decrementStep()">Previous</button>
+          </div>
+          <div>Step 3 out of 8</div>
+          <div>
+          <button class="primary-button" (click)="incrementStep()">Next</button>
+        </div>
+      </div>
     </div>
     <div *ngIf="stepCount == 4">
       <h4 class="customizedToolTip stepHeader">
-        Project Details &nbsp;
+        Project Details *&nbsp;
         <i class="fa fa-info-circle"></i>
         <span class="toolTipInfo">(What is this project all about?)</span>
       </h4>
       <hr class="step-separator">
       <quill-editor #projectDetails [theme]="snow" [styles]="editorStyle" [modules]="modules"
-        formControlName="projectDetails" (onEditorCreated)="getEditorInstance($event)">
+        formControlName="projectDetails" (onEditorCreated)="getEditorInstance($event)"
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('projectDetails').touched || caseletForm.get('projectDetails').dirty)) && ((caseletForm.get('projectDetails').value.length == 0) || (caseletForm.get('projectDetails').value == '<div><br></div>'))}">
       </quill-editor>
-      <br />
-      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
-      <br />
-      <br />
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('projectDetails').touched || caseletForm.get('projectDetails').dirty)) && ((caseletForm.get('projectDetails').value.length == 0) || (caseletForm.get('projectDetails').value == '<div><br></div>'))">
+        <span>
+          Please enter project details.
+        </span>
+      </div><br />
+      <div class = "d-flex justify-content-between">
+          <div>
+              <button class="primary-button" (click)="decrementStep()">Previous</button>
+          </div>
+          <div>Step 4 out of 8</div>
+          <div>
+          <button class="primary-button" (click)="incrementStep()">Next</button>
+        </div>
+      </div>
     </div>
     <div *ngIf="stepCount == 5">
       <h4 class="customizedToolTip stepHeader">
-        Need/ Challenges &nbsp;
+        Need/ Challenges *&nbsp;
         <i class="fa fa-info-circle"></i>
         <span class="toolTipInfo">(What was the need that is met as stated by the customer or as
           understood in conversations with the customer?
@@ -212,17 +270,29 @@
       </h4>
       <hr class="step-separator">
       <quill-editor #needChallenges [theme]="snow" [styles]=editorStyle [modules]="modules"
-        formControlName="needChallenges" (onEditorCreated)="getEditorInstance($event)">
+        formControlName="needChallenges" (onEditorCreated)="getEditorInstance($event)"
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('needChallenges').touched || caseletForm.get('needChallenges').dirty)) && ((caseletForm.get('needChallenges').value.length == 0) || (caseletForm.get('needChallenges').value == '<div><br></div>'))}">
       </quill-editor>
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('needChallenges').touched || caseletForm.get('needChallenges').dirty)) && ((caseletForm.get('needChallenges').value.length == 0) || (caseletForm.get('needChallenges').value == '<div><br></div>'))">
+        <span>
+          Please enter need/ challenges.
+        </span>
+      </div>
       <br />
-      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
-      <br />
-      <br />
+      <div class = "d-flex justify-content-between">
+          <div>
+              <button class="primary-button" (click)="decrementStep()">Previous</button>
+          </div>
+          <div>Step 5 out of 8</div>
+          <div>
+          <button class="primary-button" (click)="incrementStep()">Next</button>
+        </div>
+      </div>
     </div>
     <div *ngIf="stepCount == 6">
       <h4 class="customizedToolTip stepHeader">
-        The Solution &nbsp;
+        The Solution *&nbsp;
         <i class="fa fa-info-circle"></i>
         <span class="toolTipInfo">(What solution did we propose to help them meet this need? What
           was the technology stack we proposed and why?
@@ -232,17 +302,28 @@
       </h4>
       <hr class="step-separator">
       <quill-editor #solutionProvided [theme]="snow" [styles]="editorStyle" [modules]="modules"
-        formControlName="solutionProvided" (onEditorCreated)="getEditorInstance($event)">
+        formControlName="solutionProvided" (onEditorCreated)="getEditorInstance($event)"
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('solutionProvided').touched || caseletForm.get('solutionProvided').dirty)) && ((caseletForm.get('solutionProvided').value.length == 0) || (caseletForm.get('solutionProvided').value == '<div><br></div>'))}">
       </quill-editor>
-      <br />
-      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
-      <br />
-      <br />
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('solutionProvided').touched || caseletForm.get('solutionProvided').dirty)) && ((caseletForm.get('solutionProvided').value.length == 0) || (caseletForm.get('solutionProvided').value == '<div><br></div>'))">
+        <span>
+          Please enter the solution
+        </span>
+      </div><br />
+      <div class = "d-flex justify-content-between">
+          <div>
+              <button class="primary-button" (click)="decrementStep()">Previous</button>
+          </div>
+          <div>Step 6 out of 8</div>
+          <div>
+          <button class="primary-button" (click)="incrementStep()">Next</button>
+        </div>
+      </div>
     </div>
     <div *ngIf="stepCount == 7">
       <h4 class="customizedToolTip stepHeader">
-        Customer and Mindtree benefits &nbsp;
+        Customer and Mindtree benefits *&nbsp;
         <i class="fa fa-info-circle"></i>
         <span class="toolTipInfo">(Where are we in the project? What have we delivered – what is
           still to be provided? What value did the
@@ -251,17 +332,28 @@
       </h4>
       <hr class="step-separator">
       <quill-editor #customerAndMindtreeBenefits [theme]="snow" [styles]="editorStyle" [modules]="modules"
-        formControlName="customerAndMindtreeBenefits" (onEditorCreated)="getEditorInstance($event)">
+        formControlName="customerAndMindtreeBenefits" (onEditorCreated)="getEditorInstance($event)"
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('customerAndMindtreeBenefits').touched || caseletForm.get('customerAndMindtreeBenefits').dirty)) && ((caseletForm.get('customerAndMindtreeBenefits').value.length == 0) || (caseletForm.get('customerAndMindtreeBenefits').value == '<div><br></div>'))}">
       </quill-editor>
-      <br />
-      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-      <button class="float-right primary-button" (click)="incrementStep()">Next</button>
-      <br />
-      <br />
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('customerAndMindtreeBenefits').touched || caseletForm.get('customerAndMindtreeBenefits').dirty)) && ((caseletForm.get('customerAndMindtreeBenefits').value.length == 0) || (caseletForm.get('customerAndMindtreeBenefits').value == '<div><br></div>'))">
+        <span>
+          Please enter Customer and Mindtree Benefits.
+        </span>
+      </div><br />
+      <div class = "d-flex justify-content-between">
+          <div>
+              <button class="primary-button" (click)="decrementStep()">Previous</button>
+          </div>
+          <div>Step 7 out of 8</div>
+          <div>
+          <button class="primary-button" (click)="incrementStep()">Next</button>
+        </div>
+      </div>
     </div>
     <div *ngIf="stepCount == 8">
       <h4 class="customizedToolTip stepHeader">
-        Executive summary of the caselet &nbsp;
+        Executive summary of the caselet *&nbsp;
         <i class="fa fa-info-circle"></i>
         <span class="toolTipInfo">(Articulate the entire caselet in a concise para not exceeding
           60 words. An executive summary, or management
@@ -271,41 +363,49 @@
       </h4>
       <hr class="step-separator">
       <quill-editor #executiveSummaryOfTheCaselet [theme]="snow" [styles]="editorStyle" [modules]="modules"
-        formControlName="executiveSummaryOfTheCaselet" (onEditorCreated)="getEditorInstance($event)">
+        formControlName="executiveSummaryOfTheCaselet" (onEditorCreated)="getEditorInstance($event)"
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('executiveSummaryOfTheCaselet').touched || caseletForm.get('executiveSummaryOfTheCaselet').dirty)) && ((caseletForm.get('executiveSummaryOfTheCaselet').value.length == 0) || (caseletForm.get('executiveSummaryOfTheCaselet').value == '<div><br></div>'))}">
       </quill-editor>
-      <br />
-      <button class="float-left primary-button" (click)="decrementStep()">Previous</button>
-      <button type="button" class="float-right primary-button" (click)="reviewCaseletFunction()" data-toggle="modal"
-        data-target="#reviewModal">Review & Submit</button>
-      <br />
-      <br />
+      <div class="invalid-form-data"
+        *ngIf="((caseletForm.get('executiveSummaryOfTheCaselet').touched || caseletForm.get('executiveSummaryOfTheCaselet').dirty)) && ((caseletForm.get('executiveSummaryOfTheCaselet').value.length == 0) || (caseletForm.get('executiveSummaryOfTheCaselet').value == '<div><br></div>'))">
+        <span>
+          Please enter executive summary of the caselet.
+        </span>
+      </div><br />
+      <div class = "d-flex justify-content-between">
+          <div>
+              <button class="primary-button" (click)="decrementStep()">Previous</button>
+          </div>
+          <div>Step 8 out of 8</div>
+          <div>
+              <button type="button" class="float-right primary-button" (click)="reviewCaseletFunction()" data-toggle="modal"
+              data-target="#reviewModal">Review & Submit</button>
+        </div>
+      </div>
     </div>
     <hr class="step-separator">
     <div class="mb-5">
       <div class="float-right mb-5">
-        <button type="button" (click)="onSaveCaselet()" class="secondary-button mx-2">SAVE</button>
-        <!-- <button type="submit" class="primary-button">SUBMIT</button> -->
+        <button type="button" (click)="onSaveCaselet()" class="primary-button">SAVE</button>
+      </div>
+    </div>
+    <!-- TheReview Modal -->
+    <div class="modal preview " id="reviewModal">
+      <div class="modal-dialog mw-100 w-75">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Review Caselet</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body caseletPreview">
+            <app-review-caselet [caselet]="reviewCaselet"></app-review-caselet>
+          </div>
+          <div class="modal-footer">
+            <button [disabled] = "!caseletForm.valid" type="submit" class="primary-button" data-dismiss="modal">Submit</button>
+          </div>
+        </div>
       </div>
     </div>
   </form>
-
-  <!-- TheReview Modal -->
-  <div class="modal preview " id="reviewModal">
-    <div class="modal-dialog mw-100 w-75">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Review Caselet</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body caseletPreview">
-          <app-review-caselet [caselet]="reviewCaselet"></app-review-caselet>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="primary-button" data-dismiss="modal"
-            (click)="onCaseletFormSubmit()">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <input type="file" class="fileButton" id="fileInputField" />
 </div>

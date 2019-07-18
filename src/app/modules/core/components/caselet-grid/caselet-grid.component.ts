@@ -43,7 +43,7 @@ export class CaseletGridComponent implements OnInit {
         dataFetched: true,
         caselet: this.caselet
       };
-      this.commonService.setDownloadData(downloadCaseletData);
+      // this.commonService.setDownloadData(downloadCaseletData);
     });
   }
 }

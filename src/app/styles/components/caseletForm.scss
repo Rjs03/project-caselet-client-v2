@@ -31,7 +31,7 @@
   .toolTipInfoSmall {
     font-size: 12px;
     max-width: 30rem;
-    height: 2rem;
+    padding: 1rem;
   }
 
   .fileButton {
@@ -40,5 +40,23 @@
 
   .custom-select {
     border: #ced4da solid 1px !important;
+  }
+
+  .invalid-quill {
+    .ql-editor {
+      border: #dc3545 solid 1px !important;
+    }
+    .ql-toolbar {
+      border: #dc3545 solid 1px !important;
+    }
+  }
+
+  .invalid-form-data {
+    color: #dc3545;
+    font-size: 12px;
+  }
+
+  .primary-button {
+    min-width: 6rem;
   }
 }

@@ -35,7 +35,6 @@ export class TagCloudComponent implements OnInit {
   getTags() {
     this.tagsService.getTags().subscribe((response: any) => {
       this.serverTags = response.data.tags;
-      //console.log(response.data.tags);
       this.serverTags.map((serverTag) => {
         this.arraydata.push({
           text: serverTag.name,
