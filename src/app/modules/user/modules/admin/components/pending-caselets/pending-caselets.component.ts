@@ -34,7 +34,7 @@ export class PendingCaseletsComponent implements OnInit {
   }
 
   getAdminNames() {
-    this.adminService.getAdminNames(this.adminFilters).subscribe((response: any) => {
+    this.adminService.getAdminNames().subscribe((response: any) => {
       this.adminNames = response.data.admins;
       this.adminNames.map((adminName) => {
         this.dataService.getUserName(adminName.mid).subscribe((responseName: any) => {

@@ -213,10 +213,10 @@
       <h6>Description *</h6>
       <quill-editor #customerDetails [theme]="snow" [styles]=editorStyle [modules]="modules"
         formControlName="customerDetails" (onEditorCreated)="getEditorInstance($event)"
-        [ngClass]="{'invalid-quill' : ((caseletForm.get('customerDetails').touched || caseletForm.get('customerDetails').dirty)) && ((caseletForm.get('customerDetails').value.length == 0) || (caseletForm.get('customerDetails').value == '<div><br></div>'))}">
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('customerDetails').touched || caseletForm.get('customerDetails').dirty)) && (!caseletForm.get('customerDetails').valid)}">
       </quill-editor>
       <div class="invalid-form-data"
-        *ngIf="((caseletForm.get('customerDetails').touched || caseletForm.get('customerDetails').dirty)) && ((caseletForm.get('customerDetails').value.length == 0) || (caseletForm.get('customerDetails').value == '<div><br></div>'))">
+        *ngIf="((caseletForm.get('customerDetails').touched || caseletForm.get('customerDetails').dirty)) && (!caseletForm.get('customerDetails').valid)">
         <span>
           Please enter customer details.
         </span>
@@ -241,10 +241,10 @@
       <hr class="step-separator">
       <quill-editor #projectDetails [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="projectDetails" (onEditorCreated)="getEditorInstance($event)"
-        [ngClass]="{'invalid-quill' : ((caseletForm.get('projectDetails').touched || caseletForm.get('projectDetails').dirty)) && ((caseletForm.get('projectDetails').value.length == 0) || (caseletForm.get('projectDetails').value == '<div><br></div>'))}">
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('projectDetails').touched || caseletForm.get('projectDetails').dirty)) && (!caseletForm.get('projectDetails').valid)}">
       </quill-editor>
       <div class="invalid-form-data"
-        *ngIf="((caseletForm.get('projectDetails').touched || caseletForm.get('projectDetails').dirty)) && ((caseletForm.get('projectDetails').value.length == 0) || (caseletForm.get('projectDetails').value == '<div><br></div>'))">
+        *ngIf="((caseletForm.get('projectDetails').touched || caseletForm.get('projectDetails').dirty)) && (!caseletForm.get('projectDetails').valid)">
         <span>
           Please enter project details.
         </span>
@@ -271,10 +271,10 @@
       <hr class="step-separator">
       <quill-editor #needChallenges [theme]="snow" [styles]=editorStyle [modules]="modules"
         formControlName="needChallenges" (onEditorCreated)="getEditorInstance($event)"
-        [ngClass]="{'invalid-quill' : ((caseletForm.get('needChallenges').touched || caseletForm.get('needChallenges').dirty)) && ((caseletForm.get('needChallenges').value.length == 0) || (caseletForm.get('needChallenges').value == '<div><br></div>'))}">
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('needChallenges').touched || caseletForm.get('needChallenges').dirty)) && (!caseletForm.get('needChallenges').valid)}">
       </quill-editor>
       <div class="invalid-form-data"
-        *ngIf="((caseletForm.get('needChallenges').touched || caseletForm.get('needChallenges').dirty)) && ((caseletForm.get('needChallenges').value.length == 0) || (caseletForm.get('needChallenges').value == '<div><br></div>'))">
+        *ngIf="((caseletForm.get('needChallenges').touched || caseletForm.get('needChallenges').dirty)) && (!caseletForm.get('needChallenges').valid)">
         <span>
           Please enter need/ challenges.
         </span>
@@ -303,10 +303,10 @@
       <hr class="step-separator">
       <quill-editor #solutionProvided [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="solutionProvided" (onEditorCreated)="getEditorInstance($event)"
-        [ngClass]="{'invalid-quill' : ((caseletForm.get('solutionProvided').touched || caseletForm.get('solutionProvided').dirty)) && ((caseletForm.get('solutionProvided').value.length == 0) || (caseletForm.get('solutionProvided').value == '<div><br></div>'))}">
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('solutionProvided').touched || caseletForm.get('solutionProvided').dirty)) && (!caseletForm.get('solutionProvided').valid)}">
       </quill-editor>
       <div class="invalid-form-data"
-        *ngIf="((caseletForm.get('solutionProvided').touched || caseletForm.get('solutionProvided').dirty)) && ((caseletForm.get('solutionProvided').value.length == 0) || (caseletForm.get('solutionProvided').value == '<div><br></div>'))">
+        *ngIf="((caseletForm.get('solutionProvided').touched || caseletForm.get('solutionProvided').dirty)) && (!caseletForm.get('solutionProvided').valid)">
         <span>
           Please enter the solution
         </span>
@@ -333,10 +333,10 @@
       <hr class="step-separator">
       <quill-editor #customerAndMindtreeBenefits [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="customerAndMindtreeBenefits" (onEditorCreated)="getEditorInstance($event)"
-        [ngClass]="{'invalid-quill' : ((caseletForm.get('customerAndMindtreeBenefits').touched || caseletForm.get('customerAndMindtreeBenefits').dirty)) && ((caseletForm.get('customerAndMindtreeBenefits').value.length == 0) || (caseletForm.get('customerAndMindtreeBenefits').value == '<div><br></div>'))}">
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('customerAndMindtreeBenefits').touched || caseletForm.get('customerAndMindtreeBenefits').dirty)) && (!caseletForm.get('customerAndMindtreeBenefits').valid)}">
       </quill-editor>
       <div class="invalid-form-data"
-        *ngIf="((caseletForm.get('customerAndMindtreeBenefits').touched || caseletForm.get('customerAndMindtreeBenefits').dirty)) && ((caseletForm.get('customerAndMindtreeBenefits').value.length == 0) || (caseletForm.get('customerAndMindtreeBenefits').value == '<div><br></div>'))">
+        *ngIf="((caseletForm.get('customerAndMindtreeBenefits').touched || caseletForm.get('customerAndMindtreeBenefits').dirty)) && (!caseletForm.get('customerAndMindtreeBenefits').valid)">
         <span>
           Please enter Customer and Mindtree Benefits.
         </span>
@@ -364,10 +364,10 @@
       <hr class="step-separator">
       <quill-editor #executiveSummaryOfTheCaselet [theme]="snow" [styles]="editorStyle" [modules]="modules"
         formControlName="executiveSummaryOfTheCaselet" (onEditorCreated)="getEditorInstance($event)"
-        [ngClass]="{'invalid-quill' : ((caseletForm.get('executiveSummaryOfTheCaselet').touched || caseletForm.get('executiveSummaryOfTheCaselet').dirty)) && ((caseletForm.get('executiveSummaryOfTheCaselet').value.length == 0) || (caseletForm.get('executiveSummaryOfTheCaselet').value == '<div><br></div>'))}">
+        [ngClass]="{'invalid-quill' : ((caseletForm.get('executiveSummaryOfTheCaselet').touched || caseletForm.get('executiveSummaryOfTheCaselet').dirty)) && (!caseletForm.get('executiveSummaryOfTheCaselet').valid)}">
       </quill-editor>
       <div class="invalid-form-data"
-        *ngIf="((caseletForm.get('executiveSummaryOfTheCaselet').touched || caseletForm.get('executiveSummaryOfTheCaselet').dirty)) && ((caseletForm.get('executiveSummaryOfTheCaselet').value.length == 0) || (caseletForm.get('executiveSummaryOfTheCaselet').value == '<div><br></div>'))">
+        *ngIf="((caseletForm.get('executiveSummaryOfTheCaselet').touched || caseletForm.get('executiveSummaryOfTheCaselet').dirty)) && (!caseletForm.get('executiveSummaryOfTheCaselet').valid)">
         <span>
           Please enter executive summary of the caselet.
         </span>

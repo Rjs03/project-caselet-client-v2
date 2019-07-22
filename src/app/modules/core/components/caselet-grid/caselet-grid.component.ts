@@ -21,6 +21,8 @@ export class CaseletGridComponent implements OnInit {
     sharedCaseletTitle: ''
   };
 
+  solutionFetched = false;
+
 
   ngOnInit() {
   }
@@ -36,14 +38,11 @@ export class CaseletGridComponent implements OnInit {
     this.sharedCaseletInfo.sharedCaseletTitle = caseletTitle;
   }
 
-  downloadCaselet(caseletId, caseletName) {
+  downloadCaselet(caseletId) {
+    this.solutionFetched = false;
     this.caseletService.getCaseletById(caseletId).subscribe((response: any) => {
       this.caselet = response.data.project;
-      const downloadCaseletData = {
-        dataFetched: true,
-        caselet: this.caselet
-      };
-      // this.commonService.setDownloadData(downloadCaseletData);
+      this.solutionFetched = true;
     });
   }
 }

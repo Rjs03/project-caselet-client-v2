@@ -310,6 +310,7 @@ export class AddCaseletComponent implements OnInit {
   }
 
   buildCaseletForm() {
+    const quillRegex = '^(?!<div><br><\/div>$).*$';
     this.caseletForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(80)]],
       experts: ['', [Validators.required]],
@@ -326,12 +327,12 @@ export class AddCaseletComponent implements OnInit {
       industry: [''],
       service: [''],
       customerName: ['', [Validators.required]],
-      customerDetails: ['', Validators.required],
-      projectDetails: ['', Validators.required],
-      needChallenges: ['', Validators.required],
-      solutionProvided: ['', Validators.required],
-      customerAndMindtreeBenefits: ['', Validators.required],
-      executiveSummaryOfTheCaselet: ['', Validators.required]
+      customerDetails: ['', [Validators.required, Validators.pattern(quillRegex)]],
+      projectDetails: ['', [Validators.required, Validators.pattern(quillRegex)]],
+      needChallenges: ['', [Validators.required, Validators.pattern(quillRegex)]],
+      solutionProvided: ['', [Validators.required, Validators.pattern(quillRegex)]],
+      customerAndMindtreeBenefits: ['', [Validators.required, Validators.pattern(quillRegex)]],
+      executiveSummaryOfTheCaselet: ['', [Validators.required, Validators.pattern(quillRegex)]]
     });
   }
 
