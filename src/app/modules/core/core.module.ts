@@ -13,7 +13,6 @@ import { CaseletGridComponent } from './components/caselet-grid/caselet-grid.com
 import { CaseletListComponent } from './components/caselet-list/caselet-list.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { CaseletDownloadComponent } from './components/caselet-download/caselet-download.component';
 import { CaseletSupportComponent } from './components/caselet-support/caselet-support.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FilterPopupComponent } from './components/filter-popup/filter-popup.component';
@@ -34,7 +33,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CaseletsComponent,
     CaseletGridComponent,
     CaseletListComponent,
-    CaseletDownloadComponent,
     CaseletSupportComponent,
     FilterPopupComponent,
     CaseletShareComponent
@@ -59,7 +57,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MostSharedCaseletsComponent,
     CaseletDetailsComponent,
     CaseletFilterComponent,
-    CaseletDownloadComponent,
     CaseletsComponent,
     CaseletSupportComponent
   ]

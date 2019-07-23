@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { identifierModuleUrl } from '@angular/compiler';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -66,5 +68,23 @@ export class CaseletService {
 
   shareCaselet (shareCaseletData, id) {
     return this.httpClient.put(environment.serverUrl + environment.caselet + environment.share + id, shareCaseletData);
+  }
+
+  downloadCaselet (id) {
+    // const options = {
+    //   'Accept': 'application/pdf',
+    // };
+    // const headers = new HttpHeaders(options);
+    const httpOptions = {
+      responseType  : 'arraybuffer' as 'json'
+      //  'responseType'  : 'blob' as 'json'        //This also worked
+    };
+    // tslint:disable-next-line:max-line-length
+    // return this.httpClient.put(environment.serverUrl + environment.caselet + environment.download + id, {}, httpOptions).pipe(map(
+    //   (res: any) => {
+    //       return new Blob([res.blob()], { type: 'application/pdf' });
+    //   }));
+
+      return this.httpClient.put(environment.serverUrl + environment.caselet + environment.download + id, {}, httpOptions);
   }
 }

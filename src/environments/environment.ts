@@ -5,6 +5,7 @@ export const environment = {
   filter: 'filter/',
   metadata: 'metadata/',
   technologies: 'technologies/',
+  download: 'download/',
   tools: 'tools/',
   caselet: 'caselet/',
   save: 'save/',

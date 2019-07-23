@@ -30,10 +30,6 @@
   </div>
 </div>
 
-<div id = "content" style = "height: 0; overflow: hidden" *ngIf="solutionFetched">
-  <app-caselet-download [caselet] = "caselet"></app-caselet-download>
-</div>
-
 <!--share caselet modal-->
 <div class="modal" id="shareModal">
   <app-caselet-share [sharedCaseletInfo] = "sharedCaseletInfo"></app-caselet-share>

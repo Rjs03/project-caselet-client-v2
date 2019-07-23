@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { CaseletService } from 'src/app/services/caselet.service';
-import { DownloadService } from 'src/app/services/download.service';
-import { CommonService } from 'src/app/services/common.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-caselet-grid',
@@ -10,12 +9,12 @@ import { CommonService } from 'src/app/services/common.service';
 export class CaseletGridComponent implements OnInit {
 
 
-  constructor(private caseletService: CaseletService,
-    private commonService: CommonService) { }
+  constructor(private caseletService: CaseletService) { }
 
   @Input() caselets = [];
 
   caselet: any;
+  fileBlobUrl: any;
   sharedCaseletInfo = {
     sharedCaseletId: null,
     sharedCaseletTitle: ''
@@ -38,11 +37,10 @@ export class CaseletGridComponent implements OnInit {
     this.sharedCaseletInfo.sharedCaseletTitle = caseletTitle;
   }
 
-  downloadCaselet(caseletId) {
-    this.solutionFetched = false;
-    this.caseletService.getCaseletById(caseletId).subscribe((response: any) => {
-      this.caselet = response.data.project;
-      this.solutionFetched = true;
+  downloadCaselet(caseletId, caseletTitle) {
+    this.caseletService.downloadCaselet(caseletId).subscribe((response: any) => {
+      const file =  new Blob([response], { type: 'application/pdf' });
+      saveAs(file, caseletTitle);
     });
   }
 }

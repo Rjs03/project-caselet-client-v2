@@ -10,8 +10,6 @@ export class CommonService {
 
   caseletSubject = new BehaviorSubject({});
 
-  downloadCaseletSubject = new BehaviorSubject({});
-
   getData() {
     return this.caseletSubject.asObservable();
   }
@@ -23,13 +21,4 @@ export class CommonService {
   getDataWithoutObservable() {
     return this.caseletSubject.value;
   }
-
-  getDownloadCaseletSubject() {
-    return this.downloadCaseletSubject.asObservable();
-  }
-
-  setDownloadData(caseletData) {
-    this.downloadCaseletSubject.next(caseletData);
-  }
-
 }

@@ -24,6 +24,7 @@
     "angular-tag-cloud-module": "^3.5.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.8",
+    "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.3",
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
